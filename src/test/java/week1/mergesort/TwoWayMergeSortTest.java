@@ -1,4 +1,4 @@
-package mergesort;
+package week1.mergesort;
 
 import org.junit.Test;
 
