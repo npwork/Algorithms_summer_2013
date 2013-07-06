@@ -2,7 +2,10 @@ package week1.mergesort;
 
 import java.util.Arrays;
 
-public class TwoWayMergeSort {
+/**
+ * http://en.wikipedia.org/wiki/Merge_sort
+ */
+public class MergeSort {
 
     public static int[] sort(int[] givenArr) {
         return mergeSort(givenArr, 0, givenArr.length);

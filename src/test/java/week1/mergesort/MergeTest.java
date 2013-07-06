@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class TwoWayMergeTest {
+public class MergeTest {
 
     @Test
     public void testMergeSameSizeArrays() {
@@ -39,7 +39,7 @@ public class TwoWayMergeTest {
 
     private void assertTwoWayMerged(int[] arr1, int[] arr2, int[] expected) {
         // when
-        int[] mergedArray = TwoWayMergeSort.merge(arr1, arr2);
+        int[] mergedArray = MergeSort.merge(arr1, arr2);
 
         Arrays.equals(mergedArray, expected);
     }

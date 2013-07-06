@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class TwoWayMergeSortTest {
+public class MergeSortTest {
+
     @Test
     public void testSortEvenArrayLength() {
         // given
@@ -44,7 +45,7 @@ public class TwoWayMergeSortTest {
 
     private void assertMergeSort(int[] givenArr, int[] expectedArr) {
         // when
-        int[] sortedArr = TwoWayMergeSort.sort(givenArr);
+        int[] sortedArr = MergeSort.sort(givenArr);
 
         //then
         Arrays.equals(sortedArr, expectedArr);
