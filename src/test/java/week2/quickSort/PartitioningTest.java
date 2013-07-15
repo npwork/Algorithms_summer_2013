@@ -2,8 +2,7 @@ package week2.quickSort;
 
 import org.junit.Assert;
 import org.junit.Test;
-import week2.quickSort.AbstractQuickSort;
-import week2.quickSort.RandomizedQuickSort;
+import week2.quickSort.impl.RandomizedQuickSort;
 import week2.util.PartitioningAssertion;
 
 import java.util.Arrays;

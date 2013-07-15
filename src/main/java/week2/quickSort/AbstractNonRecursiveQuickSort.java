@@ -1,8 +1,10 @@
 package week2.quickSort;
 
+import java.math.BigInteger;
 import java.util.LinkedList;
 
-public class NonRecursiveQuickSort extends AbstractQuickSort {
+public abstract class AbstractNonRecursiveQuickSort extends AbstractQuickSort {
+
     public void sort(int[] inputArray) {
         int l = 0;
         int r = inputArray.length;
@@ -15,6 +17,8 @@ public class NonRecursiveQuickSort extends AbstractQuickSort {
             r = (Integer) stack.pop();
             l = (Integer) stack.pop();
             if (r <= l) continue;
+
+            beforePartitionAction(inputArray, l, r);
             int resultPivotIndex = partition(inputArray, l, r);
 
             stack.push(l);
@@ -25,9 +29,6 @@ public class NonRecursiveQuickSort extends AbstractQuickSort {
         }
     }
 
-    @Override
-    protected int partitionTemplateMethod(int[] inputArray, int l, int r) {
-        // Non recursive quick sort doesn't use partitionTemplateMethod
-        return 0;
+    protected void beforePartitionAction(int[] inputArray, int l, int r) {
     }
 }

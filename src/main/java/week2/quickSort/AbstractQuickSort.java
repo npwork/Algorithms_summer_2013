@@ -1,28 +1,14 @@
 package week2.quickSort;
 
+import java.math.BigInteger;
+
 /**
  * Implementing Template Method pattern
  */
 
 public abstract class AbstractQuickSort implements Sortable {
 
-    public void sort(int[] inputArray) {
-        sort(inputArray, 0, inputArray.length);
-    }
-
-    protected void sort(int[] inputArray, int l, int r) {
-        if (isSingleElementInArray(l, r)) {
-            return;
-        }
-
-        int pivotPosition = partitionTemplateMethod(inputArray, l, r);
-
-        callLeftAndRightSort(inputArray, l, pivotPosition, r);
-    }
-
-    protected abstract int partitionTemplateMethod(int[] inputArray, int l, int r);
-
-    private boolean isSingleElementInArray(int l, int r) {
+    protected boolean isSingleElementInArray(int l, int r) {
         return Math.abs(l - r) <= 1;
     }
 
@@ -30,11 +16,6 @@ public abstract class AbstractQuickSort implements Sortable {
         int tmp = inputArray[i];
         inputArray[i] = inputArray[j];
         inputArray[j] = tmp;
-    }
-
-    private void callLeftAndRightSort(int[] inputArray, int l, int pivotPosition, int r) {
-        sort(inputArray, l, pivotPosition);
-        sort(inputArray, pivotPosition + 1, r);
     }
 
     /**

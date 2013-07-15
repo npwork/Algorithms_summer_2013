@@ -2,9 +2,9 @@ package week2.quickSort;
 
 import org.junit.Assert;
 import org.junit.Test;
-import week2.quickSort.AbstractQuickSort;
-import week2.quickSort.RandomizedQuickSort;
-import week2.quickSort.SimpleQuickSort;
+import week2.quickSort.impl.RandomizedQuickSort;
+import week2.quickSort.impl.SimpleNonRecursiveQuickSort;
+import week2.quickSort.impl.SimpleQuickSort;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -13,7 +13,7 @@ public class QuickSortTest {
 
     private RandomizedQuickSort randomizedQuickSort = new RandomizedQuickSort();
     private SimpleQuickSort simpleQuickSort = new SimpleQuickSort();
-    private NonRecursiveQuickSort nonRecursiveQuickSort = new NonRecursiveQuickSort();
+    private SimpleNonRecursiveQuickSort simpleNonRecursiveQuickSort = new SimpleNonRecursiveQuickSort();
 
     @Test
     public void randomizedQuickSortTest() {
@@ -27,7 +27,7 @@ public class QuickSortTest {
 
     @Test
     public void nonRecursiveQuickSortTest() {
-        sortTest(nonRecursiveQuickSort);
+        sortTest(simpleNonRecursiveQuickSort);
     }
 
     private void sortTest(Sortable sortable) {

@@ -10,7 +10,11 @@ import static org.junit.Assert.assertTrue;
 
 public class AbstractQuckSortComparisonTest {
 
-    public static final String PATH_TO_FILE = "src/test/resources/week2/week2_input.txt";
+    public String PATH_TO_FILE = "src/test/resources/week2/week2_input.txt";
+
+    public String PATH_TO_FILE_SMALL_EXAMPLE = "src/test/resources/week2/custom_small_test.txt";
+    public String PATH_TO_FILE_MEDIUM_EXAMPLE = "src/test/resources/week2/custom_medium_test.txt";
+    public String PATH_TO_FILE_BIG_EXAMPLE = "src/test/resources/week2/custom_big_test.txt";
 
     @Test
     public void inputFileExists() {

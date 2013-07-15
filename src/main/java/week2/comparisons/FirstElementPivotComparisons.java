@@ -1,10 +1,13 @@
 package week2.comparisons;
 
 import week2.quickSort.AbstractQuickSort;
+import week2.quickSort.AbstractRecursiveQuickSort;
 
 import java.math.BigInteger;
 
-public class FirstElementPivotComparisons extends AbstractQuickSort {
+// Using first element as pivot
+// Running time <= O(n^2)
+public class FirstElementPivotComparisons extends AbstractRecursiveQuickSort {
 
     private static BigInteger comparisonsCount = new BigInteger("0");
 
