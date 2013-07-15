@@ -13,25 +13,31 @@ public class QuickSortTest {
 
     private RandomizedQuickSort randomizedQuickSort = new RandomizedQuickSort();
     private SimpleQuickSort simpleQuickSort = new SimpleQuickSort();
+    private NonRecursiveQuickSort nonRecursiveQuickSort = new NonRecursiveQuickSort();
 
     @Test
-    public void randomizedQuickSort() {
+    public void randomizedQuickSortTest() {
         sortTest(randomizedQuickSort);
     }
 
     @Test
-    public void simpleQuickSort() {
+    public void simpleQuickSortTest() {
         sortTest(simpleQuickSort);
     }
 
-    private void sortTest(AbstractQuickSort abstractQuickSortInstance) {
+    @Test
+    public void nonRecursiveQuickSortTest() {
+        sortTest(nonRecursiveQuickSort);
+    }
+
+    private void sortTest(Sortable sortable) {
         // given
         int[] randomArray = generateRandomArray(100);
         int[] sortedCopyOfRandomArray = Arrays.copyOf(randomArray, randomArray.length);
         Arrays.sort(sortedCopyOfRandomArray);
 
         // when
-        abstractQuickSortInstance.sort(randomArray);
+        sortable.sort(randomArray);
 
         // then
         Assert.assertTrue(Arrays.equals(randomArray, sortedCopyOfRandomArray));

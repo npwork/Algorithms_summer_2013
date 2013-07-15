@@ -4,7 +4,7 @@ package week2.quickSort;
  * Implementing Template Method pattern
  */
 
-public abstract class AbstractQuickSort {
+public abstract class AbstractQuickSort implements Sortable {
 
     public void sort(int[] inputArray) {
         sort(inputArray, 0, inputArray.length);
