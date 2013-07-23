@@ -13,7 +13,11 @@ public class RandomizedSelection {
         if(Math.abs(from-to) <= 1)
             return input[from];
 
+        // randomize pivot
+        int randomPivotIndex = randomBetweenTwoNumbers(from, to);
+        swap(input, from, randomPivotIndex);
         int partitionValueIndex = partition(input, from, to);
+
         // j - partitionValueIndex value order statistics in sub array
         int j = partitionValueIndex - from + 1;
 
@@ -44,5 +48,9 @@ public class RandomizedSelection {
         int temp = arr[from];
         arr[from] = arr[to];
         arr[to] = temp;
+    }
+
+    private static int randomBetweenTwoNumbers(int min, int max) {
+        return (int) (min + (Math.random() * (max - min)));
     }
 }
