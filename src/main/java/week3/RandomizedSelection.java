@@ -6,18 +6,23 @@ public class RandomizedSelection {
         return select(input, 0, input.length, ithOrderStatistics);
     }
 
+    /**
+     * @param i i_th order statistics
+     */
     private static int select(int[] input, int from, int to, int i) {
         if(Math.abs(from-to) <= 1)
             return input[from];
 
-        int j = partition(input, from, to);
+        int partitionValueIndex = partition(input, from, to);
+        // j - partitionValueIndex value order statistics in sub array
+        int j = partitionValueIndex - from + 1;
 
         if(j > i)
-            return select(input, from, j , j - i);
+            return select(input, from, partitionValueIndex , i);
         else if(j < i)
-            return select(input, j + 1, to, i - j);
+            return select(input, partitionValueIndex + 1, to, i - j);
         else
-            return input[j];
+            return input[partitionValueIndex];
     }
 
     public static int partition(int[] array, int from, int to) {
