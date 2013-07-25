@@ -1,9 +1,7 @@
-package week2.quickSort.impl;
+package coursera_stanford_2013.week2.quickSort.impl;
 
-import week2.quickSort.AbstractNonRecursiveQuickSort;
 
-import java.math.BigInteger;
-import java.util.LinkedList;
+import coursera_stanford_2013.week2.quickSort.AbstractNonRecursiveQuickSort;
 
 public class SimpleNonRecursiveQuickSort extends AbstractNonRecursiveQuickSort {
 

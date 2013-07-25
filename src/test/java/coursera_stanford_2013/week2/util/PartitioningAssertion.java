@@ -1,7 +1,6 @@
-package week2.util;
+package coursera_stanford_2013.week2.util;
 
 import org.junit.Ignore;
-import org.junit.Test;
 
 @Ignore
 public class PartitioningAssertion {

@@ -1,9 +1,9 @@
-package week2.quickSort;
+package coursera_stanford_2013.week2.quickSort;
 
+import coursera_stanford_2013.week2.quickSort.impl.RandomizedQuickSort;
 import org.junit.Assert;
 import org.junit.Test;
-import week2.quickSort.impl.RandomizedQuickSort;
-import week2.util.PartitioningAssertion;
+import coursera_stanford_2013.week2.util.PartitioningAssertion;
 
 import java.util.Arrays;
 

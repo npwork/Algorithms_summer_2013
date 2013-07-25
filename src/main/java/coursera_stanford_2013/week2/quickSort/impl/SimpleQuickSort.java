@@ -1,6 +1,6 @@
-package week2.quickSort.impl;
+package coursera_stanford_2013.week2.quickSort.impl;
 
-import week2.quickSort.AbstractRecursiveQuickSort;
+import coursera_stanford_2013.week2.quickSort.AbstractRecursiveQuickSort;
 
 /**
  * Quick sort without random generated pivot point

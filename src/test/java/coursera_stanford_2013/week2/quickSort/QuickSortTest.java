@@ -1,10 +1,10 @@
-package week2.quickSort;
+package coursera_stanford_2013.week2.quickSort;
 
+import coursera_stanford_2013.week2.quickSort.impl.RandomizedQuickSort;
+import coursera_stanford_2013.week2.quickSort.impl.SimpleNonRecursiveQuickSort;
+import coursera_stanford_2013.week2.quickSort.impl.SimpleQuickSort;
 import org.junit.Assert;
 import org.junit.Test;
-import week2.quickSort.impl.RandomizedQuickSort;
-import week2.quickSort.impl.SimpleNonRecursiveQuickSort;
-import week2.quickSort.impl.SimpleQuickSort;
 
 import java.util.Arrays;
 import java.util.Random;

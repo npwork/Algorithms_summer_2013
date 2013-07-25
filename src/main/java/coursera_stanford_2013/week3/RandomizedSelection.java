@@ -1,4 +1,4 @@
-package week3;
+package coursera_stanford_2013.week3;
 
 public class RandomizedSelection {
 

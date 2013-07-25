@@ -1,6 +1,5 @@
-package week2.quickSort;
+package coursera_stanford_2013.week2.quickSort;
 
-import java.math.BigInteger;
 import java.util.LinkedList;
 
 public abstract class AbstractNonRecursiveQuickSort extends AbstractQuickSort {

@@ -1,9 +1,10 @@
 package week3;
 
+import coursera_stanford_2013.week3.RandomizedSelection;
 import junit.framework.Assert;
 import org.junit.Test;
-import util.RandomArrayGenerator;
-import week2.util.PartitioningAssertion;
+import coursera_stanford_2013.util.RandomArrayGenerator;
+import coursera_stanford_2013.week2.util.PartitioningAssertion;
 
 import java.util.Arrays;
 

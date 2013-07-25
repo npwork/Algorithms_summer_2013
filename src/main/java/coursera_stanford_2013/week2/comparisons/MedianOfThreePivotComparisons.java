@@ -1,7 +1,6 @@
-package week2.comparisons;
+package coursera_stanford_2013.week2.comparisons;
 
-import week2.quickSort.AbstractQuickSort;
-import week2.quickSort.AbstractRecursiveQuickSort;
+import coursera_stanford_2013.week2.quickSort.AbstractRecursiveQuickSort;
 
 import java.math.BigInteger;
 import java.util.Map;

@@ -1,11 +1,16 @@
-package week2.comparisons;
+package coursera_stanford_2013.week2.comparisons;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
-import util.IntegersFromFileReader;
+import coursera_stanford_2013.util.IntegersFromFileReader;
 
 import java.io.IOException;
 
+/**
+ * Not ready yet
+ */
+@Ignore
 public class LastElementPivotComparisonsTest extends AbstractQuckSortComparisonTest {
 
     private LastElementPivotComparisons lastElementPivotComparisons = new LastElementPivotComparisons();

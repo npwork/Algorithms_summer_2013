@@ -1,12 +1,16 @@
-package week2.comparisons;
+package coursera_stanford_2013.week2.comparisons;
 
+import coursera_stanford_2013.util.IntegersFromFileReader;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
-import util.IntegersFromFileReader;
-import week2.quickSort.impl.SimpleNonRecursiveQuickSort;
 
 import java.io.IOException;
 
+/**
+ * Not ready yet
+ */
+@Ignore
 public class MedianOfThreePivotComparisonsTest extends AbstractQuckSortComparisonTest {
 
     private MedianOfThreePivotComparisons medianOfThreePivotComparisons = new MedianOfThreePivotComparisons();

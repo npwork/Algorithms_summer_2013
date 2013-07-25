@@ -1,6 +1,7 @@
-package week2.comparisons;
+package coursera_stanford_2013.week2.comparisons;
 
-import week2.quickSort.AbstractNonRecursiveQuickSort;
+
+import coursera_stanford_2013.week2.quickSort.AbstractNonRecursiveQuickSort;
 
 import java.math.BigInteger;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class MedianOfThreeNonRecursive extends AbstractNonRecursiveQuickSort {
 
         // middle
         Map.Entry<Integer, Integer> medianValue = items.pollFirstEntry();
-        if(medianValue != null) {
+        if (medianValue != null) {
             swap(inputArray, l, medianValue.getValue());
         } else {
             // >= 2 same elements

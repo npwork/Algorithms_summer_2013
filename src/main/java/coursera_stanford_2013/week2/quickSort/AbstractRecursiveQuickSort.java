@@ -1,4 +1,4 @@
-package week2.quickSort;
+package coursera_stanford_2013.week2.quickSort;
 
 public abstract class AbstractRecursiveQuickSort extends AbstractQuickSort {
 

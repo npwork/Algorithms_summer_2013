@@ -1,20 +1,17 @@
-package week1.inversions;
+package coursera_stanford_2013.week1.inversions;
 
 import org.junit.Test;
-import week1.mergesort.MergeSort;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class InversionsCounterTest {
 
-    public static final String PATH_TO_FILE = "src/test/resources/week1/test_input.txt";
+    public static final String PATH_TO_FILE = "src/test/resources/coursera_stanford_2013/week1/test_input.txt";
 
     @Test
     public void inputFileExists() {

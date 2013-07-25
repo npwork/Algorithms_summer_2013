@@ -1,4 +1,4 @@
-package week1.mergesort;
+package coursera_stanford_2013.week1.mergesort;
 
 import java.util.Arrays;
 

@@ -1,6 +1,4 @@
-package week2.quickSort;
-
-import java.math.BigInteger;
+package coursera_stanford_2013.week2.quickSort;
 
 /**
  * Implementing Template Method pattern

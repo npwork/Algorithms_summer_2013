@@ -1,4 +1,4 @@
-package week1.inversions;
+package coursera_stanford_2013.week1.inversions;
 
 import java.math.BigInteger;
 import java.util.Arrays;
