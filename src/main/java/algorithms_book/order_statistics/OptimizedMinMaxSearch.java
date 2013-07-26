@@ -1,4 +1,4 @@
-package algorithms_book;
+package algorithms_book.order_statistics;
 
 /**
  * Looks for min and max element in array using 3(n/2) comparisons

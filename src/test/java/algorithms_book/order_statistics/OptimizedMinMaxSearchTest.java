@@ -1,4 +1,4 @@
-package algorithms_book;
+package algorithms_book.order_statistics;
 
 import junit.framework.Assert;
 import org.junit.Test;
