@@ -32,4 +32,31 @@ public class InsertionSortTest {
         // then
         Assert.assertTrue(Arrays.equals(expectedArray, ascendingArray));
     }
+
+    @Test
+    public void reverse_sort_ascending_sort() {
+        // given
+        int[] ascendingArray = {1, 2, 3, 4, 5, 6};
+        int[] expectedArray = {6, 5, 4, 3, 2, 1};
+
+        // when
+        InsertionSort.reverseSort(ascendingArray);
+        System.out.println(Arrays.toString(ascendingArray));
+
+        // then
+        Assert.assertTrue(Arrays.equals(expectedArray, ascendingArray));
+    }
+
+    @Test
+    public void reverse_sort_descending_sort() {
+        // given
+        int[] ascendingArray = {6, 5, 4, 3, 2, 1};
+        int[] expectedArray = {6, 5, 4, 3, 2, 1};
+
+        // when
+        InsertionSort.reverseSort(ascendingArray);
+
+        // then
+        Assert.assertTrue(Arrays.equals(expectedArray, ascendingArray));
+    }
 }
