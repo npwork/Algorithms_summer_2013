@@ -4,6 +4,7 @@ package coursera_stanford_2013.week3.graphs;
 import coursera_stanford_2013.week3.graphs.Edge;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class UndirectedGraphAL {
 
     private Map<Integer, Vertex> vertexMap = new HashMap<Integer, Vertex>();
+    private List<Edge> edges = new ArrayList<Edge>();
 
     public Vertex addVertex(int key) {
         Vertex retrieved = getVertex(key);
@@ -79,6 +81,7 @@ public class UndirectedGraphAL {
 
         vertexOne.addAdjacent(vertexTwo);
         vertexTwo.addAdjacent(vertexOne);
+        edges.add(new Edge(keyOne, keyTwo));
         return true;
     }
 
@@ -94,6 +97,7 @@ public class UndirectedGraphAL {
 
         vertexOne.addAdjacent(vertexTwo);
         vertexTwo.addAdjacent(vertexOne);
+        edges.add(new Edge(keyOne, keyTwo));
         return true;
     }
 
@@ -131,6 +135,7 @@ public class UndirectedGraphAL {
 
         vertexOne.removeEdge(vertexTwo);
         vertexTwo.removeEdge(vertexOne);
+        edges.remove(new Edge(key1, key2));
         return true;
     }
 
@@ -138,5 +143,8 @@ public class UndirectedGraphAL {
         return vertexMap.size();
     }
 
+    public List<Edge> getEdges() {
+        return edges;
+    }
 
 }

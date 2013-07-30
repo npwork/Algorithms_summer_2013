@@ -1,7 +1,8 @@
-package coursera_stanford_2013.week3;
+package coursera_stanford_2013.week3.graphs;
 
 import coursera_stanford_2013.util.RandomArrayGenerator;
 import coursera_stanford_2013.week2.util.PartitioningAssertion;
+import coursera_stanford_2013.week3.RandomizedSelection;
 import org.junit.Assert;
 import org.junit.Test;
 

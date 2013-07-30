@@ -27,4 +27,24 @@ public class Edge {
     public void setTo(int to) {
         this.to = to;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Edge)) return false;
+
+        Edge edge = (Edge) o;
+
+        if (from != edge.from) return false;
+        if (to != edge.to) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = from;
+        result = 31 * result + to;
+        return result;
+    }
 }
