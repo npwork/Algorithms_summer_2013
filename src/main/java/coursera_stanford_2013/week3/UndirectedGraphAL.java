@@ -27,6 +27,19 @@ public class UndirectedGraphAL {
         return vertexMap.get(key);
     }
 
+    public Vertex removeVertex(int key) {
+        Vertex vertex = vertexMap.get(key);
+        if(vertex == null)
+            return null;
+
+        for(Vertex v : vertex.getAdjacent()) {
+            v.removeEdge(vertex);
+        }
+
+        vertexMap.remove(key);
+        return vertex;
+    }
+
     public boolean addEdge(int keyOne, int keyTwo) {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);

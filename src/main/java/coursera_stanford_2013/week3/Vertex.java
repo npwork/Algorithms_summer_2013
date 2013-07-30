@@ -31,4 +31,8 @@ public class Vertex {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public List<Vertex> getAdjacent() {
+        return adjacent;
+    }
 }
