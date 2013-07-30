@@ -40,6 +40,11 @@ public class UndirectedGraphAL {
         return vertex;
     }
 
+    public void changeEdge(Edge fromEdge, Edge toEdge) {
+        removeEdge(fromEdge.getFrom(), fromEdge.getTo());
+        addEdgeAndCreateVertex(toEdge.getFrom(), toEdge.getTo());
+    }
+
     public boolean addEdge(int keyOne, int keyTwo) {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);

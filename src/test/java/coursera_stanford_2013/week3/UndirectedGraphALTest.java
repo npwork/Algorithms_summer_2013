@@ -130,4 +130,21 @@ public class UndirectedGraphALTest {
         Assert.assertFalse(graph.hasEdge(key1, key3));
         Assert.assertFalse(graph.hasEdge(key3, key1));
     }
+
+    @Test
+    public void changeEdge() {
+        // given
+        int key1 = 1;
+        int key2 = 2;
+        int key3 = 3;
+        graph.addEdgeAndCreateVertex(key1, key2);
+        graph.addEdgeAndCreateVertex(key1, key3);
+
+        //when
+        graph.changeEdge(new Edge(1,3), new Edge(2, 3));
+
+        // then
+        Assert.assertFalse(graph.hasEdge(key1, key3));
+        Assert.assertTrue(graph.hasEdge(key2, key3));
+    }
 }
