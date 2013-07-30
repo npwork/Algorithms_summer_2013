@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week3;
+package coursera_stanford_2013.week3.graphs;
 
 import java.util.ArrayList;
 import java.util.List;

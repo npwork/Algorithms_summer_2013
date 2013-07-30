@@ -1,7 +1,11 @@
-package coursera_stanford_2013.week3;
+package coursera_stanford_2013.week3.graphs;
 
+
+import coursera_stanford_2013.week3.graphs.Edge;
+import coursera_stanford_2013.week3.graphs.Vertex;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +42,27 @@ public class UndirectedGraphAL {
 
         vertexMap.remove(key);
         return vertex;
+    }
+
+    public int contract(int key1, int key2) {
+        Vertex vertex1 = vertexMap.get(key1);
+        Vertex vertex2 = vertexMap.get(key2);
+        if(vertex1 == null || vertex2 == null)
+            throw new IllegalArgumentException("No vertex");
+
+        List<Vertex> adjacent = vertex2.getAdjacent();
+        // can't modify during iteration
+        while(!adjacent.isEmpty()) {
+            Vertex vertexItem = adjacent.get(0);
+            Edge edgeToRemove = new Edge(vertex2.getValue(), vertexItem.getValue());
+            Edge edgeToAdd = new Edge(vertex1.getValue(), vertexItem.getValue());
+
+            changeEdge(edgeToRemove, edgeToAdd);
+        }
+
+        removeVertex(key2);
+
+        return key1;
     }
 
     public void changeEdge(Edge fromEdge, Edge toEdge) {
@@ -81,6 +106,22 @@ public class UndirectedGraphAL {
         return vertexOne == null ? false : vertexOne.hasEdge(vertexTwo);
     }
 
+    public int countOfEdges(int keyOne, int keyTwo) {
+        Vertex vertexOne = vertexMap.get(keyOne);
+        Vertex vertexTwo = vertexMap.get(keyTwo);
+        if(vertexOne == null || vertexTwo == null)
+            return 0;
+
+        int counter = 0;
+        for(Vertex v : vertexOne.getAdjacent()) {
+            if(v.getValue() == keyTwo)
+                counter++;
+
+        }
+
+        return counter;
+    }
+
     public boolean removeEdge(int key1, int key2) {
         Vertex vertexOne = vertexMap.get(key1);
         Vertex vertexTwo = vertexMap.get(key2);
@@ -92,4 +133,10 @@ public class UndirectedGraphAL {
         vertexTwo.removeEdge(vertexOne);
         return true;
     }
+
+    public int vertexSize() {
+        return vertexMap.size();
+    }
+
+
 }
