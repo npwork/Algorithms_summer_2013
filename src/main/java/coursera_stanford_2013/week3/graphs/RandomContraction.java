@@ -16,8 +16,13 @@ public class RandomContraction {
 
             removeSelfLoops(edges);
         }
+        return graph.edgeSize();
+    }
 
-        return edges.size();
+    private static void printEdges(List<Edge> edges) {
+        for(Edge e : edges) {
+            System.out.println(e.getFrom() + " " + e.getTo());
+        }
     }
 
     private static void removeSelfLoops(List<Edge> edges) {

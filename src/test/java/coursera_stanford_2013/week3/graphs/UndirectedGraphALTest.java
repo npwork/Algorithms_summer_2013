@@ -1,8 +1,5 @@
-package coursera_stanford_2013.week3;
+package coursera_stanford_2013.week3.graphs;
 
-import coursera_stanford_2013.week3.graphs.Edge;
-import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
-import coursera_stanford_2013.week3.graphs.Vertex;
 import org.junit.Before;
 import org.junit.Test;
 
