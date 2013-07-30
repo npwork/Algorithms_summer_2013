@@ -1,7 +1,8 @@
 package algorithms_book.order_statistics;
 
-import junit.framework.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class OptimizedMinMaxSearchTest {
 
@@ -16,8 +17,8 @@ public class OptimizedMinMaxSearchTest {
         OptimizedMinMaxSearch.MinMaxValue minMaxValue = OptimizedMinMaxSearch.getMinAndMax(givenArray);
 
         // then
-        Assert.assertEquals(expectedMin, minMaxValue.getMin());
-        Assert.assertEquals(expectedMax, minMaxValue.getMax());
+        assertEquals(expectedMin, minMaxValue.getMin());
+        assertEquals(expectedMax, minMaxValue.getMax());
     }
 
     @Test
@@ -31,8 +32,8 @@ public class OptimizedMinMaxSearchTest {
         OptimizedMinMaxSearch.MinMaxValue minMaxValue = OptimizedMinMaxSearch.getMinAndMax(givenArray);
 
         // then
-        Assert.assertEquals(expectedMin, minMaxValue.getMin());
-        Assert.assertEquals(expectedMax, minMaxValue.getMax());
+        assertEquals(expectedMin, minMaxValue.getMin());
+        assertEquals(expectedMax, minMaxValue.getMax());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -56,8 +57,8 @@ public class OptimizedMinMaxSearchTest {
         OptimizedMinMaxSearch.MinMaxValue minMaxValue = OptimizedMinMaxSearch.getMinAndMax(givenArray);
 
         // then
-        Assert.assertEquals(expectedMinAndMax, minMaxValue.getMin());
-        Assert.assertEquals(expectedMinAndMax, minMaxValue.getMax());
+        assertEquals(expectedMinAndMax, minMaxValue.getMin());
+        assertEquals(expectedMinAndMax, minMaxValue.getMax());
     }
 
     @Test
@@ -71,8 +72,8 @@ public class OptimizedMinMaxSearchTest {
         OptimizedMinMaxSearch.MinMaxValue minMaxValue = OptimizedMinMaxSearch.getMinAndMax(givenArray);
 
         // then
-        Assert.assertEquals(expectedMin, minMaxValue.getMin());
-        Assert.assertEquals(expectedMax, minMaxValue.getMax());
+        assertEquals(expectedMin, minMaxValue.getMin());
+        assertEquals(expectedMax, minMaxValue.getMax());
     }
 
     @Test
@@ -86,7 +87,7 @@ public class OptimizedMinMaxSearchTest {
         OptimizedMinMaxSearch.MinMaxValue minMaxValue = OptimizedMinMaxSearch.getMinAndMax(givenArray);
 
         // then
-        Assert.assertEquals(expectedMin, minMaxValue.getMin());
-        Assert.assertEquals(expectedMax, minMaxValue.getMax());
+        assertEquals(expectedMin, minMaxValue.getMin());
+        assertEquals(expectedMax, minMaxValue.getMax());
     }
 }

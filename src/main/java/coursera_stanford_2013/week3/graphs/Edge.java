@@ -1,8 +1,7 @@
 package coursera_stanford_2013.week3.graphs;
 
-public class Edge {
+public class Edge implements Cloneable {
     private int from;
-
     private int to;
 
     public Edge(int from, int to) {
@@ -35,8 +34,12 @@ public class Edge {
 
         Edge edge = (Edge) o;
 
-        if (from != edge.from) return false;
-        if (to != edge.to) return false;
+        if (from != edge.from && from != edge.to)
+            return false;
+
+        if (to != edge.to && to != edge.from)
+            return false;
+
 
         return true;
     }
@@ -46,5 +49,10 @@ public class Edge {
         int result = from;
         result = 31 * result + to;
         return result;
+    }
+
+    @Override
+    public Edge clone() throws CloneNotSupportedException {
+        return new Edge(from, to);
     }
 }

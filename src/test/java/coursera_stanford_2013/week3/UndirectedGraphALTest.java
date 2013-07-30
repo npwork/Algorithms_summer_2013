@@ -3,9 +3,13 @@ package coursera_stanford_2013.week3;
 import coursera_stanford_2013.week3.graphs.Edge;
 import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 public class UndirectedGraphALTest {
 
@@ -27,7 +31,7 @@ public class UndirectedGraphALTest {
         // then
         Vertex retrieved = graph.getVertex(key);
 
-        Assert.assertEquals(key, retrieved.getValue());
+        assertEquals(key, retrieved.getValue());
     }
 
     @Test
@@ -46,8 +50,8 @@ public class UndirectedGraphALTest {
         boolean hasEdgeOne = graph.hasEdge(key1, key2);
         boolean hasEdgeTwo = graph.hasEdge(key2, key1);
 
-        Assert.assertTrue(hasEdgeOne);
-        Assert.assertTrue(hasEdgeTwo);
+        assertTrue(hasEdgeOne);
+        assertTrue(hasEdgeTwo);
     }
 
     @Test
@@ -65,8 +69,8 @@ public class UndirectedGraphALTest {
 
         // then
 
-        Assert.assertFalse(hasEdgeOne);
-        Assert.assertFalse(hasEdgeTwo);
+        assertFalse(hasEdgeOne);
+        assertFalse(hasEdgeTwo);
     }
 
     @Test
@@ -87,8 +91,8 @@ public class UndirectedGraphALTest {
         boolean hasEdgeOne = graph.hasEdge(key1, key2);
         boolean hasEdgeTwo = graph.hasEdge(key2, key1);
 
-        Assert.assertFalse(hasEdgeOne);
-        Assert.assertFalse(hasEdgeTwo);
+        assertFalse(hasEdgeOne);
+        assertFalse(hasEdgeTwo);
     }
 
     @Test
@@ -104,10 +108,10 @@ public class UndirectedGraphALTest {
         boolean hasEdgeOne = graph.hasEdge(key1, key2);
         boolean hasEdgeTwo = graph.hasEdge(key2, key1);
 
-        Assert.assertNotNull(graph.getVertex(key1));
-        Assert.assertNotNull(graph.getVertex(key2));
-        Assert.assertTrue(hasEdgeOne);
-        Assert.assertTrue(hasEdgeTwo);
+        assertNotNull(graph.getVertex(key1));
+        assertNotNull(graph.getVertex(key2));
+        assertTrue(hasEdgeOne);
+        assertTrue(hasEdgeTwo);
     }
 
     @Test
@@ -123,15 +127,15 @@ public class UndirectedGraphALTest {
         graph.removeVertex(key1);
 
         // then
-        Assert.assertNull(graph.getVertex(key1));
+        assertNull(graph.getVertex(key1));
 
         // 1 and 2
-        Assert.assertFalse(graph.hasEdge(key1, key2));
-        Assert.assertFalse(graph.hasEdge(key2, key1));
+        assertFalse(graph.hasEdge(key1, key2));
+        assertFalse(graph.hasEdge(key2, key1));
 
         // 1 and 3
-        Assert.assertFalse(graph.hasEdge(key1, key3));
-        Assert.assertFalse(graph.hasEdge(key3, key1));
+        assertFalse(graph.hasEdge(key1, key3));
+        assertFalse(graph.hasEdge(key3, key1));
     }
 
     @Test
@@ -144,11 +148,11 @@ public class UndirectedGraphALTest {
         graph.addEdgeAndCreateVertex(key1, key3);
 
         //when
-        graph.changeEdge(new Edge(1,3), new Edge(2, 3));
+        graph.changeEdge(new Edge(1, 3), new Edge(2, 3));
 
         // then
-        Assert.assertFalse(graph.hasEdge(key1, key3));
-        Assert.assertTrue(graph.hasEdge(key2, key3));
+        assertFalse(graph.hasEdge(key1, key3));
+        assertTrue(graph.hasEdge(key2, key3));
     }
 
     @Test
@@ -161,7 +165,7 @@ public class UndirectedGraphALTest {
         int countOfEdges = graph.countOfEdges(key1, key2);
 
         // then
-        Assert.assertEquals(0, countOfEdges);
+        assertEquals(0, countOfEdges);
     }
 
     @Test
@@ -175,7 +179,7 @@ public class UndirectedGraphALTest {
         int countOfEdges = graph.countOfEdges(key1, key2);
 
         // then
-        Assert.assertEquals(1, countOfEdges);
+        assertEquals(1, countOfEdges);
     }
 
     @Test
@@ -190,7 +194,7 @@ public class UndirectedGraphALTest {
         int countOfEdges = graph.countOfEdges(key1, key2);
 
         // then
-        Assert.assertEquals(2, countOfEdges);
+        assertEquals(2, countOfEdges);
     }
 
     @Test
@@ -210,12 +214,69 @@ public class UndirectedGraphALTest {
         int newKey = graph.contract(key1, key3);
 
         // then
-        Assert.assertEquals(3, graph.vertexSize());
+        assertEquals(3, graph.vertexSize());
 
-        Assert.assertNull(graph.getVertex(key3));
+        assertNull(graph.getVertex(key3));
 
-        Assert.assertEquals(2, graph.countOfEdges(newKey, key2));
-        Assert.assertTrue(graph.hasEdge(newKey, key4));
-        Assert.assertTrue(graph.hasEdge(key2, key4));
+        assertEquals(2, graph.countOfEdges(newKey, key2));
+        assertTrue(graph.hasEdge(newKey, key4));
+        assertTrue(graph.hasEdge(key2, key4));
+    }
+
+    @Test
+    public void cloneTest() throws CloneNotSupportedException {
+        // > given
+        int key1 = 1;
+        int key2 = 2;
+        int key3 = 3;
+        int key4 = 4;
+        graph.addEdgeAndCreateVertex(key1, key2);
+        graph.addEdgeAndCreateVertex(key1, key3);
+        graph.addEdgeAndCreateVertex(key3, key4);
+        graph.addEdgeAndCreateVertex(key2, key4);
+        graph.addEdgeAndCreateVertex(key3, key2);
+
+        // > when
+
+        UndirectedGraphAL clonedInstance = graph.clone();
+
+
+        // > then
+        assertTrue(graph != clonedInstance);
+
+        // order holds
+        assertTrue(graph.hasEdge(key1, key2));
+        assertTrue(graph.hasEdge(key1, key3));
+        assertTrue(graph.hasEdge(key3, key4));
+        assertTrue(graph.hasEdge(key2, key4));
+        assertTrue(graph.hasEdge(key3, key2));
+
+        assertEquals(graph.getEdges().size(), clonedInstance.getEdges().size());
+        assertEquals(graph.getVertexMap().size(), clonedInstance.getVertexMap().size());
+
+        // edges
+        for (int i = 0; i < clonedInstance.getEdges().size(); ++i) {
+            Edge clonedEdge = clonedInstance.getEdges().get(i);
+            Edge graphEdge = graph.getEdges().get(i);
+
+            assertTrue(clonedEdge != graphEdge);
+
+            // double check
+            clonedEdge.setFrom(graphEdge.getFrom() + 100);
+            assertTrue(clonedEdge.getFrom() != graphEdge.getFrom());
+        }
+
+        // vertexMaps
+        Iterator<Map.Entry<Integer,Vertex>> clonedInstanceIterator = clonedInstance.getVertexMap().entrySet().iterator();
+        Iterator<Map.Entry<Integer,Vertex>> graphIterator = graph.getVertexMap().entrySet().iterator();
+        while(clonedInstanceIterator.hasNext()) {
+            Map.Entry<Integer, Vertex> clonedValue = clonedInstanceIterator.next();
+            Map.Entry<Integer, Vertex> graphValue = graphIterator.next();
+
+            assertTrue(clonedValue.getKey().equals(graphValue.getKey()));
+            assertTrue(clonedValue.getValue().equals(graphValue.getValue()));
+
+            assertTrue(clonedValue.getValue() != graphValue.getValue());
+        }
     }
 }

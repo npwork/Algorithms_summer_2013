@@ -3,10 +3,12 @@ package coursera_stanford_2013.week3.graphs;
 import coursera_stanford_2013.util.RandomArrayGenerator;
 import coursera_stanford_2013.week2.util.PartitioningAssertion;
 import coursera_stanford_2013.week3.RandomizedSelection;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RandomizedSelectionTest {
 
@@ -14,24 +16,24 @@ public class RandomizedSelectionTest {
     public void test_strait_order() {
         int[] input = {1, 2, 3, 4, 5, 6};
 
-        Assert.assertEquals(1, RandomizedSelection.select(input, 1));
-        Assert.assertEquals(2, RandomizedSelection.select(input, 2));
-        Assert.assertEquals(3, RandomizedSelection.select(input, 3));
-        Assert.assertEquals(4, RandomizedSelection.select(input, 4));
-        Assert.assertEquals(5, RandomizedSelection.select(input, 5));
-        Assert.assertEquals(6, RandomizedSelection.select(input, 6));
+        assertEquals(1, RandomizedSelection.select(input, 1));
+        assertEquals(2, RandomizedSelection.select(input, 2));
+        assertEquals(3, RandomizedSelection.select(input, 3));
+        assertEquals(4, RandomizedSelection.select(input, 4));
+        assertEquals(5, RandomizedSelection.select(input, 5));
+        assertEquals(6, RandomizedSelection.select(input, 6));
     }
 
     @Test
     public void test_reverse_order() {
         int[] input = {6, 5, 4, 3, 2, 1};
 
-        Assert.assertEquals(1, RandomizedSelection.select(input, 1));
-        Assert.assertEquals(2, RandomizedSelection.select(input, 2));
-        Assert.assertEquals(3, RandomizedSelection.select(input, 3));
-        Assert.assertEquals(4, RandomizedSelection.select(input, 4));
-        Assert.assertEquals(5, RandomizedSelection.select(input, 5));
-        Assert.assertEquals(6, RandomizedSelection.select(input, 6));
+        assertEquals(1, RandomizedSelection.select(input, 1));
+        assertEquals(2, RandomizedSelection.select(input, 2));
+        assertEquals(3, RandomizedSelection.select(input, 3));
+        assertEquals(4, RandomizedSelection.select(input, 4));
+        assertEquals(5, RandomizedSelection.select(input, 5));
+        assertEquals(6, RandomizedSelection.select(input, 6));
     }
 
     @Test
@@ -43,7 +45,7 @@ public class RandomizedSelectionTest {
 
         Arrays.sort(input);
 
-        Assert.assertEquals(input[oderStatistics - 1], selectValue);
+        assertEquals(input[oderStatistics - 1], selectValue);
     }
 
 
@@ -71,6 +73,6 @@ public class RandomizedSelectionTest {
         RandomizedSelection.partition(inputArray, 0, 1);
 
         // then
-        org.junit.Assert.assertTrue(Arrays.equals(inputArray, expectedArray));
+        assertTrue(Arrays.equals(inputArray, expectedArray));
     }
 }

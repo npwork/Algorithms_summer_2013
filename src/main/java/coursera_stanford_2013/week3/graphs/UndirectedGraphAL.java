@@ -1,26 +1,20 @@
 package coursera_stanford_2013.week3.graphs;
 
 
-import coursera_stanford_2013.week3.graphs.Edge;
-import coursera_stanford_2013.week3.graphs.Vertex;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Undirected graph representation
  * Adjacency list
  */
-public class UndirectedGraphAL {
+public class UndirectedGraphAL implements Cloneable {
 
     private Map<Integer, Vertex> vertexMap = new HashMap<Integer, Vertex>();
     private List<Edge> edges = new ArrayList<Edge>();
 
     public Vertex addVertex(int key) {
         Vertex retrieved = getVertex(key);
-        if(retrieved != null)
+        if (retrieved != null)
             return retrieved;
 
         Vertex instance = new Vertex(key);
@@ -35,10 +29,10 @@ public class UndirectedGraphAL {
 
     public Vertex removeVertex(int key) {
         Vertex vertex = vertexMap.get(key);
-        if(vertex == null)
+        if (vertex == null)
             return null;
 
-        for(Vertex v : vertex.getAdjacent()) {
+        for (Vertex v : vertex.getAdjacent()) {
             v.removeEdge(vertex);
         }
 
@@ -49,15 +43,15 @@ public class UndirectedGraphAL {
     public int contract(int key1, int key2) {
         Vertex vertex1 = vertexMap.get(key1);
         Vertex vertex2 = vertexMap.get(key2);
-        if(vertex1 == null || vertex2 == null)
+        if (vertex1 == null || vertex2 == null)
             throw new IllegalArgumentException("No vertex");
 
-        List<Vertex> adjacent = vertex2.getAdjacent();
+        List<Vertex> adjacentOfSecondVertex = vertex2.getAdjacent();
         // can't modify during iteration
-        while(!adjacent.isEmpty()) {
-            Vertex vertexItem = adjacent.get(0);
-            Edge edgeToRemove = new Edge(vertex2.getValue(), vertexItem.getValue());
-            Edge edgeToAdd = new Edge(vertex1.getValue(), vertexItem.getValue());
+        while (!adjacentOfSecondVertex.isEmpty()) {
+            Vertex vertexIterableItem = adjacentOfSecondVertex.get(0);
+            Edge edgeToRemove = new Edge(vertex2.getValue(), vertexIterableItem.getValue());
+            Edge edgeToAdd = new Edge(vertex1.getValue(), vertexIterableItem.getValue());
 
             changeEdge(edgeToRemove, edgeToAdd);
         }
@@ -76,7 +70,7 @@ public class UndirectedGraphAL {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);
 
-        if(vertexOne == null || vertexTwo == null)
+        if (vertexOne == null || vertexTwo == null)
             return false;
 
         vertexOne.addAdjacent(vertexTwo);
@@ -89,10 +83,10 @@ public class UndirectedGraphAL {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);
 
-        if(vertexOne == null)
+        if (vertexOne == null)
             vertexOne = addVertex(keyOne);
 
-        if(vertexTwo == null)
+        if (vertexTwo == null)
             vertexTwo = addVertex(keyTwo);
 
         vertexOne.addAdjacent(vertexTwo);
@@ -104,7 +98,7 @@ public class UndirectedGraphAL {
     public boolean hasEdge(int keyOne, int keyTwo) {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);
-        if(vertexOne == null || vertexTwo == null)
+        if (vertexOne == null || vertexTwo == null)
             return false;
 
         return vertexOne == null ? false : vertexOne.hasEdge(vertexTwo);
@@ -113,12 +107,12 @@ public class UndirectedGraphAL {
     public int countOfEdges(int keyOne, int keyTwo) {
         Vertex vertexOne = vertexMap.get(keyOne);
         Vertex vertexTwo = vertexMap.get(keyTwo);
-        if(vertexOne == null || vertexTwo == null)
+        if (vertexOne == null || vertexTwo == null)
             return 0;
 
         int counter = 0;
-        for(Vertex v : vertexOne.getAdjacent()) {
-            if(v.getValue() == keyTwo)
+        for (Vertex v : vertexOne.getAdjacent()) {
+            if (v.getValue() == keyTwo)
                 counter++;
 
         }
@@ -130,7 +124,7 @@ public class UndirectedGraphAL {
         Vertex vertexOne = vertexMap.get(key1);
         Vertex vertexTwo = vertexMap.get(key2);
 
-        if(vertexOne == null || vertexTwo == null)
+        if (vertexOne == null || vertexTwo == null)
             return false;
 
         vertexOne.removeEdge(vertexTwo);
@@ -147,4 +141,39 @@ public class UndirectedGraphAL {
         return edges;
     }
 
+    public void setVertexMap(Map<Integer, Vertex> vertexMap) {
+        this.vertexMap = vertexMap;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
+    public Map<Integer, Vertex> getVertexMap() {
+        return vertexMap;
+    }
+
+    @Override
+    public UndirectedGraphAL clone() throws CloneNotSupportedException {
+        UndirectedGraphAL instance = new UndirectedGraphAL();
+        // edges
+        List<Edge> listOfEdges = new ArrayList<Edge>();
+        for (int i = 0; i < edges.size(); ++i) {
+            listOfEdges.add(edges.get(i).clone());
+        }
+        instance.setEdges(listOfEdges);
+
+        // vertexMap
+        Map<Integer, Vertex> newVertexMap = new HashMap <Integer, Vertex>();
+
+        Iterator<Map.Entry<Integer, Vertex>> iterator = vertexMap.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry<Integer, Vertex> next = iterator.next();
+            newVertexMap.put(next.getKey(), next.getValue().customClone(newVertexMap));
+        }
+
+        instance.setVertexMap(newVertexMap);
+        return instance;
+    }
 }
