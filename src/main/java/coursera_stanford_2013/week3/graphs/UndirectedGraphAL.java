@@ -7,7 +7,6 @@ import java.util.*;
  * Undirected graph representation
  * Adjacency list
  */
-// @TODO undirected graph adjacency list without bidirectional relation between vertices
 public class UndirectedGraphAL implements Cloneable {
 
     private Map<Integer, Vertex> vertexMap = new HashMap<Integer, Vertex>();
