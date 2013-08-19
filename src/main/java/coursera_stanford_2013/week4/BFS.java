@@ -12,6 +12,31 @@ import java.util.Queue;
  * Breadth-first search
  */
 public class BFS {
+
+    // Corman algorithm
+    public static Result search(UndirectedGraphAL graphAL, int startPoint, int searchValue) {
+        return null;
+    }
+
+    public static class Result {
+
+        private Vertex vertex;
+        private int vertexDistance;
+
+        public Result(Vertex vertex, int vertexDistance) {
+            this.vertex = vertex;
+            this.vertexDistance = vertexDistance;
+        }
+
+        public int getVertexValue() {
+            return vertex.getValue();
+        }
+
+        public int getVertexDistance() {
+            return vertexDistance;
+        }
+    }
+
     public static Vertex isConnected(UndirectedGraphAL graph, int startVertex, int searchVertex) {
         Map<Integer, Vertex> alreadyExploredVertices = new HashMap<Integer, Vertex>();
         Queue<Integer> verticesToExplore = new LinkedList<Integer>();
@@ -22,7 +47,7 @@ public class BFS {
             Vertex vertex = graph.getVertex(vertexNameFromQueue);
 
             for (Vertex adjacentVertex : vertex.getAdjacent()) {
-                if(foundExpectedVertex(searchVertex, adjacentVertex))
+                if (foundExpectedVertex(searchVertex, adjacentVertex))
                     return adjacentVertex;
 
                 processAdjacentVertex(alreadyExploredVertices, verticesToExplore, adjacentVertex);
