@@ -1,6 +1,7 @@
-package coursera_stanford_2013.week5.bst;
+package coursera_stanford_2013.week5.bst.operations;
 
-import coursera_stanford_2013.week5.BST;
+import coursera_stanford_2013.week5.BSTNode;
+import coursera_stanford_2013.week5.bst.AbstractBstTest;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertNull;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * Time: 8:30 AM
  * To change this template use File | Settings | File Templates.
  */
-public class BSTTest_remove extends AbstractBstTest {
+public class Remove extends AbstractBstTest {
     @Test
     public void should_remove_value_when_no_children_placing_in_the_root_position() throws Exception {
         // given
@@ -99,7 +100,7 @@ public class BSTTest_remove extends AbstractBstTest {
     }
 
     private void assertItemDeleted(int itemToDelete, int[] givenArray) {
-        BST.BSTNode search = bst.search(itemToDelete);
+        BSTNode search = bst.search(itemToDelete);
 
         assertNull(search);
         assertEquals(givenArray.length - 1, bst.getSize());

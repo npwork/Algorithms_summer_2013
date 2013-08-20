@@ -1,6 +1,7 @@
 package coursera_stanford_2013.week5.bst;
 
 import coursera_stanford_2013.week5.BST;
+import coursera_stanford_2013.week5.BSTImpl;
 import org.junit.Before;
 
 /**
@@ -15,7 +16,7 @@ public class AbstractBstTest {
 
     @Before
     public void setUp() throws Exception {
-        bst = new BST();
+        bst = new BSTImpl();
     }
 
     protected void addAllElementsToBst(int[] givenArray) {
