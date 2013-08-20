@@ -78,7 +78,6 @@ public class BSTImpl implements BST {
             return search(key, currentNode.getLeft());
         else
             return search(key, currentNode.getRight());
-
     }
 
     @Override
@@ -87,19 +86,23 @@ public class BSTImpl implements BST {
         if (searchResult == null)
             return null;
 
-        if (searchResult.getLeft() != null) {
-            return min(searchResult.getLeft());
-        } else {
-            return getPredecessorUpperInTree(searchResult);
-        }
+        BSTNode predecessorNode = findPredecessorNode(searchResult);
+        return predecessorNode == null ? null : predecessorNode.getKey();
     }
 
-    private Integer getPredecessorUpperInTree(BSTNode searchResult) {
+    private BSTNode findPredecessorNode(BSTNode searchResult) {
+        if (searchResult.getLeft() != null)
+            return findMinNode(searchResult.getLeft());
+        else
+            return getPredecessorNodeUpperInTree(searchResult);
+    }
+
+    private BSTNode getPredecessorNodeUpperInTree(BSTNode searchResult) {
         BSTNode currentNode = searchResult.getParent();
         while (currentNode != null && isLeftChildOfParent(currentNode)) {
             currentNode = currentNode.getParent();
         }
-        return getParentKeyOrNull(currentNode);
+        return currentNode == null ? null : currentNode.getParent();
     }
 
     @Override
@@ -108,26 +111,23 @@ public class BSTImpl implements BST {
         if (searchResult == null)
             return null;
 
-        if (searchResult.getRight() != null) {
-            return min(searchResult.getRight());
-        } else {
-            return getSuccessorUpperInTree(searchResult);
-        }
+        BSTNode successorNode = findSuccessorNode(searchResult);
+        return successorNode == null ? null : successorNode.getKey();
     }
 
-    private Integer getSuccessorUpperInTree(BSTNode searchResult) {
+    private BSTNode findSuccessorNode(BSTNode searchResult) {
+        if (searchResult.getRight() != null)
+            return findMinNode(searchResult.getRight());
+        else
+            return getSuccessorNodeUpperInTree(searchResult);
+    }
+
+    private BSTNode getSuccessorNodeUpperInTree(BSTNode searchResult) {
         BSTNode currentNode = searchResult.getParent();
         while (currentNode != null && isRightChildOfParent(currentNode)) {
             currentNode = currentNode.getParent();
         }
-        return getParentKeyOrNull(currentNode);
-    }
-
-    private Integer getParentKeyOrNull(BSTNode currentNode) {
-        if (currentNode == null)
-            return null;
-        else
-            return currentNode.getParent() == null ? null : currentNode.getParent().getKey();
+        return currentNode == null ? null : currentNode.getParent();
     }
 
     private boolean isRightChildOfParent(BSTNode currentNode) {
@@ -147,7 +147,7 @@ public class BSTImpl implements BST {
         if (hasNoChildren(searchResult)) {
             deleteWithoutChildren(searchResult);
         } else if (hasTwoChildren(searchResult)) {
-            return false;
+            deleteWithTwoChildren(searchResult);
         } else if (hasOneChild(searchResult)) {
             deleteWithOneChild(searchResult);
         }
@@ -155,6 +155,9 @@ public class BSTImpl implements BST {
         size--;
         return true;
 
+    }
+
+    private void deleteWithTwoChildren(BSTNode searchResult) {
     }
 
     private boolean hasTwoChildren(BSTNode searchResult) {
@@ -247,6 +250,11 @@ public class BSTImpl implements BST {
     }
 
     private Integer max(BSTNode startNode) {
+        BSTNode maxNode = findMaxNode(startNode);
+        return maxNode == null ? null : maxNode.getKey();
+    }
+
+    private BSTNode findMaxNode(BSTNode startNode) {
         if (startNode == null)
             return null;
 
@@ -254,7 +262,7 @@ public class BSTImpl implements BST {
         while (currentNode.getRight() != null) {
             currentNode = currentNode.getRight();
         }
-        return currentNode.getKey();
+        return currentNode;
     }
 
     @Override
@@ -263,6 +271,11 @@ public class BSTImpl implements BST {
     }
 
     private Integer min(BSTNode startNode) {
+        BSTNode minNode = findMinNode(startNode);
+        return minNode == null ? null : minNode.getKey();
+    }
+
+    private BSTNode findMinNode(BSTNode startNode) {
         if (startNode == null)
             return null;
 
@@ -270,7 +283,7 @@ public class BSTImpl implements BST {
         while (currentNode.getLeft() != null) {
             currentNode = currentNode.getLeft();
         }
-        return currentNode.getKey();
+        return currentNode;
     }
 
     @Override
