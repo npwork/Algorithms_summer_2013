@@ -4,7 +4,7 @@ import coursera_stanford_2013.week5.BSTNode;
 import coursera_stanford_2013.week5.bst.AbstractBstTest;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -16,6 +16,20 @@ import static org.junit.Assert.assertEquals;
  */
 public class Remove extends AbstractBstTest {
     @Test
+    public void should_return_false_if_cant_find_item() throws Exception {
+        // given
+        int differentValue = 100500;
+        int[] givenArray = {1, 2, 3};
+        addAllElementsToBst(givenArray);
+
+        // when
+        boolean removeResult = bst.remove(differentValue);
+
+        // then
+        assertFalse(removeResult);
+    }
+
+    @Test
     public void should_remove_value_when_no_children_placing_in_the_root_position() throws Exception {
         // given
         int itemToDelete = 500;
@@ -23,9 +37,10 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
     }
 
@@ -37,9 +52,10 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
     }
 
@@ -51,9 +67,11 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
+
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
     }
 
@@ -65,9 +83,10 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
     }
 
@@ -79,9 +98,10 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
     }
 
@@ -93,10 +113,25 @@ public class Remove extends AbstractBstTest {
         addAllElementsToBst(givenArray);
 
         // when
-        bst.remove(itemToDelete);
+        boolean removeResult = bst.remove(itemToDelete);
 
         // then
+        assertTrue(removeResult);
         assertItemDeleted(itemToDelete, givenArray);
+    }
+
+    @Test
+    public void should_remove_all_values_sequentially() throws Exception {
+        // given
+        int[] givenArray = {1, 2, 3, 4, 5};
+        addAllElementsToBst(givenArray);
+
+        // when
+        for (int i : givenArray)
+            assertTrue(bst.remove(i));
+
+        // then
+        assertEquals(0, bst.getSize());
     }
 
     private void assertItemDeleted(int itemToDelete, int[] givenArray) {

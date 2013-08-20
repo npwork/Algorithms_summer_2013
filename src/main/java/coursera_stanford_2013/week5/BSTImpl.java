@@ -9,18 +9,23 @@ public class BSTImpl implements BST {
 
     @Override
     public void add(Integer key) {
-        BSTNode nodeToAdd = new BSTNode(key);
-        if (rootNode == null) {
-            rootNode = nodeToAdd;
-            size++;
-            return;
-        }
+        if (rootNode == null)
+            addRootNode(key);
+        else
+            addNonRootNode(key);
+    }
 
+    private void addNonRootNode(Integer key) {
         BSTNode currentNode = rootNode;
 
         while (currentNode != null) {
-            currentNode = processTreeLevel(currentNode, nodeToAdd);
+            currentNode = processTreeLevel(currentNode, new BSTNode(key));
         }
+    }
+
+    private void addRootNode(Integer key) {
+        rootNode = new BSTNode(key);
+        size++;
     }
 
     private BSTNode processTreeLevel(BSTNode currentNode, BSTNode nodeToAdd) {
@@ -141,23 +146,34 @@ public class BSTImpl implements BST {
     @Override
     public boolean remove(Integer key) {
         BSTNode searchResult = search(key);
+        return removeTreeNode(searchResult);
+    }
+
+    private boolean removeTreeNode(BSTNode searchResult) {
         if (searchResult == null)
             return false;
 
-        if (hasNoChildren(searchResult)) {
-            deleteWithoutChildren(searchResult);
-        } else if (hasTwoChildren(searchResult)) {
-            deleteWithTwoChildren(searchResult);
-        } else if (hasOneChild(searchResult)) {
-            deleteWithOneChild(searchResult);
-        }
+        removeNode(searchResult);
 
         size--;
         return true;
+    }
 
+    private void removeNode(BSTNode nodeToDelete) {
+        if (hasNoChildren(nodeToDelete)) {
+            deleteWithoutChildren(nodeToDelete);
+        } else if (hasTwoChildren(nodeToDelete)) {
+            deleteWithTwoChildren(nodeToDelete);
+        } else if (hasOneChild(nodeToDelete)) {
+            deleteWithOneChild(nodeToDelete);
+        }
     }
 
     private void deleteWithTwoChildren(BSTNode searchResult) {
+        BSTNode minNodeFromRightSubTree = findMinNode(searchResult.getRight());
+
+        searchResult.setKey(minNodeFromRightSubTree.getKey());
+        removeNode(minNodeFromRightSubTree);
     }
 
     private boolean hasTwoChildren(BSTNode searchResult) {
