@@ -1,23 +1,18 @@
-package coursera_stanford_2013.week5;
+package coursera_stanford_2013.week5.bst;
 
+import coursera_stanford_2013.week5.BST;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class BSTTest {
-
-    private BST bst;
-
-    @Before
-    public void setUp() throws Exception {
-        bst = new BST();
-    }
-
+public class BSTTest extends AbstractBstTest {
     @Test
     public void should_print_tree_keys_in_order_tree_walk() throws Exception {
         // given
@@ -54,10 +49,6 @@ public class BSTTest {
         assertEquals(Integer.valueOf(parentValue), searchResultNode.getParent().getKey());
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void should_throw_exception_if_call_min_on_empty_tree() throws Exception {
-        bst.min();
-    }
 
     @Test
     public void should_return_minimum_value() throws Exception {
@@ -72,9 +63,14 @@ public class BSTTest {
         assertEquals(givenMinimumValue, resultMinimumValue);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void should_throw_exception_if_call_max_on_empty_tree() throws Exception {
-        bst.max();
+    @Test
+    public void should_return_null_if_call_min_on_empty_tree() throws Exception {
+        assertNull(bst.min());
+    }
+
+    @Test
+    public void should_return_null_if_call_max_on_empty_tree() throws Exception {
+        assertNull(bst.max());
     }
 
     @Test
@@ -90,9 +86,36 @@ public class BSTTest {
         assertEquals(givenMaximumValue, resultMaximumValue);
     }
 
-    private void addAllElementsToBst(int[] givenArray) {
-        for (int item : givenArray)
-            bst.add(item);
+    @Test
+    public void should_return_successor_of_the_value_if_has_right_node() throws Exception {
+        // given
+        int successorSearchValue = 100;
+        int successorValue = 500;
+        addAllElementsToBst(new int[]{0, 5, successorSearchValue, successorValue});
+
+        // when
+        int resultSuccessor = bst.successor(successorSearchValue);
+
+        // then
+        assertEquals(successorValue, resultSuccessor);
+    }
+
+    @Test
+    public void should_return_successor_of_the_value() throws Exception {
+        // given
+        int successorSearchValue = 13;
+        int successorValue = 15;
+        addAllElementsToBst(new int[]{successorValue, 6, 7, successorSearchValue, 9});
+
+        // when
+        int resultSuccessor = bst.successor(successorSearchValue);
+
+        // then
+        assertEquals(successorValue, resultSuccessor);
+    }
+
+    @Test
+    public void should_return_predecessor_of_the_value() throws Exception {
     }
 
     private int[] getIntArray(Integer[] result) {

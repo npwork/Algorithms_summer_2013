@@ -69,18 +69,120 @@ public class BST {
     }
 
     private BSTNode search(Integer key, BSTNode currentNode) {
-        if(currentNode == null || key == currentNode.getKey())
+        if (currentNode == null || key.equals(currentNode.getKey()))
             return currentNode;
 
-        if(key < currentNode.getKey())
+        if (key < currentNode.getKey())
             return search(key, currentNode.getLeft());
         else
             return search(key, currentNode.getRight());
 
     }
 
-    public void delete(Integer key) {
+    public int predecessor(int key) {
+        return 0;
+    }
 
+    public Integer successor(int key) {
+        BSTNode searchResult = search(key);
+        if(searchResult == null)
+            return null;
+
+        if(searchResult.getRight() != null) {
+            return min(searchResult.getRight());
+        } else {
+            BSTNode currentNode = searchResult.getParent();
+            while(currentNode != null && isRightChildOfParent(currentNode)) {
+                currentNode = currentNode.getParent();
+            }
+            return currentNode == null ? null : currentNode.getParent().getKey();
+        }
+    }
+
+    private boolean isRightChildOfParent(BSTNode currentNode) {
+        return currentNode.getParent() != null && currentNode.getParent().getRight() == currentNode;
+    }
+
+    public boolean remove(Integer key) {
+        BSTNode searchResult = search(key);
+        if (searchResult == null)
+            return false;
+
+        if (hasNoChildren(searchResult)) {
+            deleteWithoutChildren(searchResult);
+        } else if (hasTwoChildren(searchResult)) {
+            return false;
+        } else if (hasOneChild(searchResult)) {
+            deleteWithOneChild(searchResult);
+        }
+
+        size--;
+        return true;
+
+    }
+
+    private boolean hasTwoChildren(BSTNode searchResult) {
+        return searchResult.getLeft() != null && searchResult.getRight() != null;
+    }
+
+    private void deleteWithOneChild(BSTNode searchResult) {
+        if (isInRootPosition(searchResult))
+            deleteWithOneChildIfRootElement(searchResult);
+        else
+            deleteWithOneChildIfNotRootElement(searchResult);
+
+    }
+
+    private boolean isInRootPosition(BSTNode searchResult) {
+        return searchResult.getParent() == null;
+    }
+
+    private void deleteWithOneChildIfNotRootElement(BSTNode searchResult) {
+        BSTNode parent = searchResult.getParent();
+        getNotNullNode(searchResult).setParent(parent);
+
+        if (parent.getLeft() != null)
+            parent.setLeft(null);
+        if (parent.getRight() != null)
+            parent.setRight(null);
+
+        searchResult.setParent(null);
+    }
+
+    private void deleteWithOneChildIfRootElement(BSTNode searchResult) {
+        BSTNode notNullNode = getNotNullNode(searchResult);
+        notNullNode.setParent(null);
+        rootNode = notNullNode;
+    }
+
+    private BSTNode getNotNullNode(BSTNode searchResult) {
+        return searchResult.getLeft() == null ? searchResult.getRight() : searchResult.getLeft();
+    }
+
+    private boolean hasOneChild(BSTNode searchResult) {
+        return searchResult.getLeft() != null || searchResult.getRight() != null;
+    }
+
+    private void deleteWithoutChildren(BSTNode searchResult) {
+        BSTNode parent = searchResult.getParent();
+        if (parent == null) {
+            rootNode = null;
+            return;
+        }
+
+        if (isNodeLeftParentLeaf(parent, searchResult)) {
+            parent.setLeft(null);
+        } else {
+            parent.setRight(null);
+        }
+    }
+
+    private boolean isNodeLeftParentLeaf(BSTNode parent, BSTNode searchResult) {
+        return parent.getLeft() != null && parent.getLeft().getKey() == searchResult.getKey();
+    }
+
+    private boolean hasNoChildren(BSTNode searchResult) {
+        return searchResult.getLeft() == null && searchResult.getRight() == null;
     }
 
     public void toArray(Integer[] resultArray) {
@@ -103,10 +205,14 @@ public class BST {
     }
 
     public Integer max() {
-        if(rootNode == null)
-            throw new IllegalStateException("Empty tree");
+        return max(rootNode);
+    }
 
-        BSTNode currentNode = rootNode;
+    private Integer max(BSTNode startNode) {
+        if (startNode == null)
+            return null;
+
+        BSTNode currentNode = startNode;
         while (currentNode.getRight() != null) {
             currentNode = currentNode.getRight();
         }
@@ -114,11 +220,15 @@ public class BST {
     }
 
     public Integer min() {
-        if(rootNode == null)
-            throw new IllegalStateException("Empty tree");
+        return min(rootNode);
+    }
 
-        BSTNode currentNode = rootNode;
-        while(currentNode.getLeft() != null) {
+    private Integer min(BSTNode startNode) {
+        if (startNode == null)
+            return null;
+
+        BSTNode currentNode = startNode;
+        while (currentNode.getLeft() != null) {
             currentNode = currentNode.getLeft();
         }
         return currentNode.getKey();
