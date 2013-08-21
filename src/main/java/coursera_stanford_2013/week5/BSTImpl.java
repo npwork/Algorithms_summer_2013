@@ -1,34 +1,40 @@
 package coursera_stanford_2013.week5;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class BSTImpl implements BST {
-    private BSTNode rootNode;
+public class BSTImpl<E> implements BST<E> {
+    private Comparator<E> comparator;
+    private BSTNode<E> rootNode;
     private int size;
 
+    public BSTImpl(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
+
     @Override
-    public void add(Integer key) {
+    public void add(E key) {
         if (rootNode == null)
             addRootNode(key);
         else
             addNonRootNode(key);
     }
 
-    private void addNonRootNode(Integer key) {
-        BSTNode currentNode = rootNode;
+    private void addNonRootNode(E key) {
+        BSTNode<E> currentNode = rootNode;
 
         while (currentNode != null) {
-            currentNode = processTreeLevel(currentNode, new BSTNode(key));
+            currentNode = processTreeLevel(currentNode, new BSTNode<E>(key));
         }
     }
 
-    private void addRootNode(Integer key) {
-        rootNode = new BSTNode(key);
+    private void addRootNode(E key) {
+        rootNode = new BSTNode<E>(key);
         size++;
     }
 
-    private BSTNode processTreeLevel(BSTNode currentNode, BSTNode nodeToAdd) {
+    private BSTNode<E> processTreeLevel(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         if (shouldGoToTheLeft(currentNode, nodeToAdd)) {
             return processLeft(currentNode, nodeToAdd);
         } else {
@@ -36,7 +42,7 @@ public class BSTImpl implements BST {
         }
     }
 
-    private BSTNode processLeft(BSTNode currentNode, BSTNode nodeToAdd) {
+    private BSTNode<E> processLeft(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         if (currentNode.getLeft() == null) {
             addLeftNode(currentNode, nodeToAdd);
             return null;
@@ -45,17 +51,29 @@ public class BSTImpl implements BST {
         }
     }
 
-    private void addLeftNode(BSTNode currentNode, BSTNode nodeToAdd) {
+    private void addLeftNode(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         currentNode.setLeft(nodeToAdd);
         nodeToAdd.setParent(currentNode);
         size++;
     }
 
-    private boolean shouldGoToTheLeft(BSTNode currentNode, BSTNode nodeToAdd) {
-        return nodeToAdd.getKey() < currentNode.getKey();
+    private boolean shouldGoToTheLeft(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
+        return lessThan(nodeToAdd.getKey(), currentNode.getKey());
     }
 
-    private BSTNode processRight(BSTNode currentNode, BSTNode nodeToAdd) {
+    private boolean lessThan(E o1, E o2) {
+        return comparator.compare(o1, o2) < 0;
+    }
+
+    private boolean equals(E o1, E o2) {
+        return comparator.compare(o1, o2) == 0;
+    }
+
+    private boolean greaterThan(E o1, E o2) {
+        return comparator.compare(o1, o2) > 0;
+    }
+
+    private BSTNode<E> processRight(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         if (currentNode.getRight() == null) {
             addRightNode(currentNode, nodeToAdd);
             return null;
@@ -64,46 +82,46 @@ public class BSTImpl implements BST {
         }
     }
 
-    private void addRightNode(BSTNode currentNode, BSTNode nodeToAdd) {
+    private void addRightNode(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         currentNode.setRight(nodeToAdd);
         nodeToAdd.setParent(currentNode);
         size++;
     }
 
     @Override
-    public BSTNode search(Integer key) {
+    public BSTNode<E> search(E key) {
         return search(key, rootNode);
     }
 
-    private BSTNode search(Integer key, BSTNode currentNode) {
+    private BSTNode<E> search(E key, BSTNode<E> currentNode) {
         if (currentNode == null || key.equals(currentNode.getKey()))
             return currentNode;
 
-        if (key < currentNode.getKey())
+        if (lessThan(key, currentNode.getKey()))
             return search(key, currentNode.getLeft());
         else
             return search(key, currentNode.getRight());
     }
 
     @Override
-    public Integer predecessor(int key) {
-        BSTNode searchResult = search(key);
+    public E predecessor(E key) {
+        BSTNode<E> searchResult = search(key);
         if (searchResult == null)
             return null;
 
-        BSTNode predecessorNode = findPredecessorNode(searchResult);
+        BSTNode<E> predecessorNode = findPredecessorNode(searchResult);
         return predecessorNode == null ? null : predecessorNode.getKey();
     }
 
-    private BSTNode findPredecessorNode(BSTNode searchResult) {
+    private BSTNode<E> findPredecessorNode(BSTNode<E> searchResult) {
         if (searchResult.getLeft() != null)
             return findMinNode(searchResult.getLeft());
         else
             return getPredecessorNodeUpperInTree(searchResult);
     }
 
-    private BSTNode getPredecessorNodeUpperInTree(BSTNode searchResult) {
-        BSTNode currentNode = searchResult.getParent();
+    private BSTNode<E> getPredecessorNodeUpperInTree(BSTNode<E> searchResult) {
+        BSTNode<E> currentNode = searchResult.getParent();
         while (currentNode != null && isLeftChildOfParent(currentNode)) {
             currentNode = currentNode.getParent();
         }
@@ -111,45 +129,45 @@ public class BSTImpl implements BST {
     }
 
     @Override
-    public Integer successor(int key) {
-        BSTNode searchResult = search(key);
+    public E successor(E key) {
+        BSTNode<E> searchResult = search(key);
         if (searchResult == null)
             return null;
 
-        BSTNode successorNode = findSuccessorNode(searchResult);
+        BSTNode<E> successorNode = findSuccessorNode(searchResult);
         return successorNode == null ? null : successorNode.getKey();
     }
 
-    private BSTNode findSuccessorNode(BSTNode searchResult) {
+    private BSTNode<E> findSuccessorNode(BSTNode<E> searchResult) {
         if (searchResult.getRight() != null)
             return findMinNode(searchResult.getRight());
         else
             return getSuccessorNodeUpperInTree(searchResult);
     }
 
-    private BSTNode getSuccessorNodeUpperInTree(BSTNode searchResult) {
-        BSTNode currentNode = searchResult.getParent();
+    private BSTNode<E> getSuccessorNodeUpperInTree(BSTNode<E> searchResult) {
+        BSTNode<E> currentNode = searchResult.getParent();
         while (currentNode != null && isRightChildOfParent(currentNode)) {
             currentNode = currentNode.getParent();
         }
         return currentNode == null ? null : currentNode.getParent();
     }
 
-    private boolean isRightChildOfParent(BSTNode currentNode) {
+    private boolean isRightChildOfParent(BSTNode<E> currentNode) {
         return currentNode.getParent() != null && currentNode.getParent().getRight() == currentNode;
     }
 
-    private boolean isLeftChildOfParent(BSTNode currentNode) {
+    private boolean isLeftChildOfParent(BSTNode<E> currentNode) {
         return currentNode.getParent() != null && currentNode.getParent().getLeft() == currentNode;
     }
 
     @Override
-    public boolean remove(Integer key) {
-        BSTNode searchResult = search(key);
+    public boolean remove(E key) {
+        BSTNode<E> searchResult = search(key);
         return removeTreeNode(searchResult);
     }
 
-    private boolean removeTreeNode(BSTNode searchResult) {
+    private boolean removeTreeNode(BSTNode<E> searchResult) {
         if (searchResult == null)
             return false;
 
@@ -159,7 +177,7 @@ public class BSTImpl implements BST {
         return true;
     }
 
-    private void removeNode(BSTNode nodeToDelete) {
+    private void removeNode(BSTNode<E> nodeToDelete) {
         if (hasNoChildren(nodeToDelete)) {
             deleteWithoutChildren(nodeToDelete);
         } else if (hasTwoChildren(nodeToDelete)) {
@@ -169,18 +187,18 @@ public class BSTImpl implements BST {
         }
     }
 
-    private void deleteWithTwoChildren(BSTNode searchResult) {
-        BSTNode minNodeFromRightSubTree = findMinNode(searchResult.getRight());
+    private void deleteWithTwoChildren(BSTNode<E> searchResult) {
+        BSTNode<E> minNodeFromRightSubTree = findMinNode(searchResult.getRight());
 
         searchResult.setKey(minNodeFromRightSubTree.getKey());
         removeNode(minNodeFromRightSubTree);
     }
 
-    private boolean hasTwoChildren(BSTNode searchResult) {
+    private boolean hasTwoChildren(BSTNode<E> searchResult) {
         return searchResult.getLeft() != null && searchResult.getRight() != null;
     }
 
-    private void deleteWithOneChild(BSTNode searchResult) {
+    private void deleteWithOneChild(BSTNode<E> searchResult) {
         if (isInRootPosition(searchResult))
             deleteWithOneChildIfRootElement(searchResult);
         else
@@ -188,12 +206,12 @@ public class BSTImpl implements BST {
 
     }
 
-    private boolean isInRootPosition(BSTNode searchResult) {
+    private boolean isInRootPosition(BSTNode<E> searchResult) {
         return searchResult.getParent() == null;
     }
 
-    private void deleteWithOneChildIfNotRootElement(BSTNode searchResult) {
-        BSTNode parent = searchResult.getParent();
+    private void deleteWithOneChildIfNotRootElement(BSTNode<E> searchResult) {
+        BSTNode<E> parent = searchResult.getParent();
         getNotNullNode(searchResult).setParent(parent);
 
         if (parent.getLeft() != null)
@@ -204,22 +222,22 @@ public class BSTImpl implements BST {
         searchResult.setParent(null);
     }
 
-    private void deleteWithOneChildIfRootElement(BSTNode searchResult) {
-        BSTNode notNullNode = getNotNullNode(searchResult);
+    private void deleteWithOneChildIfRootElement(BSTNode<E> searchResult) {
+        BSTNode<E> notNullNode = getNotNullNode(searchResult);
         notNullNode.setParent(null);
         rootNode = notNullNode;
     }
 
-    private BSTNode getNotNullNode(BSTNode searchResult) {
+    private BSTNode<E> getNotNullNode(BSTNode<E> searchResult) {
         return searchResult.getLeft() == null ? searchResult.getRight() : searchResult.getLeft();
     }
 
-    private boolean hasOneChild(BSTNode searchResult) {
+    private boolean hasOneChild(BSTNode<E> searchResult) {
         return searchResult.getLeft() != null || searchResult.getRight() != null;
     }
 
-    private void deleteWithoutChildren(BSTNode searchResult) {
-        BSTNode parent = searchResult.getParent();
+    private void deleteWithoutChildren(BSTNode<E> searchResult) {
+        BSTNode<E> parent = searchResult.getParent();
         if (parent == null) {
             rootNode = null;
             return;
@@ -232,17 +250,17 @@ public class BSTImpl implements BST {
         }
     }
 
-    private boolean isNodeLeftParentLeaf(BSTNode parent, BSTNode searchResult) {
+    private boolean isNodeLeftParentLeaf(BSTNode<E> parent, BSTNode<E> searchResult) {
         return parent.getLeft() != null && parent.getLeft().getKey() == searchResult.getKey();
     }
 
-    private boolean hasNoChildren(BSTNode searchResult) {
+    private boolean hasNoChildren(BSTNode<E> searchResult) {
         return searchResult.getLeft() == null && searchResult.getRight() == null;
     }
 
     @Override
-    public void toArray(Integer[] resultArray) {
-        List<Integer> resultList = new ArrayList<Integer>(size);
+    public void toArray(E[] resultArray) {
+        List<E> resultList = new ArrayList<E>(size);
         print(rootNode, resultList);
 
         for (int i = 0; i < resultList.size(); ++i) {
@@ -251,7 +269,7 @@ public class BSTImpl implements BST {
     }
 
 
-    public void print(BSTNode node, List<Integer> list) {
+    public void print(BSTNode<E> node, List<E> list) {
         if (node == null)
             return;
 
@@ -261,20 +279,20 @@ public class BSTImpl implements BST {
     }
 
     @Override
-    public Integer max() {
+    public E max() {
         return max(rootNode);
     }
 
-    private Integer max(BSTNode startNode) {
-        BSTNode maxNode = findMaxNode(startNode);
+    private E max(BSTNode<E> startNode) {
+        BSTNode<E> maxNode = findMaxNode(startNode);
         return maxNode == null ? null : maxNode.getKey();
     }
 
-    private BSTNode findMaxNode(BSTNode startNode) {
+    private BSTNode<E> findMaxNode(BSTNode<E> startNode) {
         if (startNode == null)
             return null;
 
-        BSTNode currentNode = startNode;
+        BSTNode<E> currentNode = startNode;
         while (currentNode.getRight() != null) {
             currentNode = currentNode.getRight();
         }
@@ -282,20 +300,20 @@ public class BSTImpl implements BST {
     }
 
     @Override
-    public Integer min() {
+    public E min() {
         return min(rootNode);
     }
 
-    private Integer min(BSTNode startNode) {
-        BSTNode minNode = findMinNode(startNode);
+    private E min(BSTNode<E> startNode) {
+        BSTNode<E> minNode = findMinNode(startNode);
         return minNode == null ? null : minNode.getKey();
     }
 
-    private BSTNode findMinNode(BSTNode startNode) {
+    private BSTNode<E> findMinNode(BSTNode<E> startNode) {
         if (startNode == null)
             return null;
 
-        BSTNode currentNode = startNode;
+        BSTNode<E> currentNode = startNode;
         while (currentNode.getLeft() != null) {
             currentNode = currentNode.getLeft();
         }

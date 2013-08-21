@@ -7,16 +7,16 @@ package coursera_stanford_2013.week5;
  * Time: 11:28
  * To change this template use File | Settings | File Templates.
  */
-public class BSTNode {
+public class BSTNode<E> {
     private BSTNode left;
     private BSTNode right;
     private BSTNode parent;
-    private Integer key;
+    private E key;
 
     public BSTNode() {
     }
 
-    public BSTNode(Integer key) {
+    public BSTNode(E key) {
         this.key = key;
     }
 
@@ -44,11 +44,11 @@ public class BSTNode {
         this.parent = parent;
     }
 
-    public Integer getKey() {
+    public E getKey() {
         return key;
     }
 
-    public void setKey(Integer key) {
+    public void setKey(E key) {
         this.key = key;
     }
 }

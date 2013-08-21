@@ -1,21 +1,21 @@
 package coursera_stanford_2013.week5;
 
-public interface BST {
-    void add(Integer key);
+public interface BST<E> {
+    void add(E key);
 
-    boolean remove(Integer key);
+    BSTNode<E> search(E key);
 
-    BSTNode search(Integer key);
+    boolean remove(E key);
 
-    Integer predecessor(int key);
+    void toArray(E[] resultArray);
 
-    Integer successor(int key);
+    E max();
 
-    void toArray(Integer[] resultArray);
-
-    Integer max();
-
-    Integer min();
+    E min();
 
     int getSize();
+
+    E successor(E key);
+
+    E predecessor(E key);
 }
