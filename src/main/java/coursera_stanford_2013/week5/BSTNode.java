@@ -12,6 +12,7 @@ public class BSTNode<E> {
     private BSTNode right;
     private BSTNode parent;
     private E key;
+    private E maxInSubTree;
 
     public BSTNode() {
     }
@@ -50,5 +51,13 @@ public class BSTNode<E> {
 
     public void setKey(E key) {
         this.key = key;
+    }
+
+    public E getMaxInSubTree() {
+        return maxInSubTree;
+    }
+
+    public void setMaxInSubTree(E maxInSubTree) {
+        this.maxInSubTree = maxInSubTree;
     }
 }

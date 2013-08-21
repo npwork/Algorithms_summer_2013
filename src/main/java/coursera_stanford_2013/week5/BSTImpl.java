@@ -23,9 +23,12 @@ public class BSTImpl<E> implements BST<E> {
 
     private void addNonRootNode(E key) {
         BSTNode<E> currentNode = rootNode;
+        BSTNode<E> nodeToAdd = new BSTNode<E>(key);
 
         while (currentNode != null) {
-            currentNode = processTreeLevel(currentNode, new BSTNode<E>(key));
+            BSTNode<E> retrievedNode = processTreeLevel(currentNode, nodeToAdd);
+//            currentNode.setMaxInSubTree(nodeToAdd.getKey());
+            currentNode = retrievedNode;
         }
     }
 
@@ -35,11 +38,19 @@ public class BSTImpl<E> implements BST<E> {
     }
 
     private BSTNode<E> processTreeLevel(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
+        setMaxInSubTree(currentNode, nodeToAdd);
+
         if (shouldGoToTheLeft(currentNode, nodeToAdd)) {
             return processLeft(currentNode, nodeToAdd);
         } else {
             return processRight(currentNode, nodeToAdd);
         }
+    }
+
+    private void setMaxInSubTree(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
+        E currentMaxInSubTree = currentNode.getMaxInSubTree();
+        if(currentMaxInSubTree == null || greaterThan(nodeToAdd.getKey(), currentMaxInSubTree))
+            currentNode.setMaxInSubTree(nodeToAdd.getKey());
     }
 
     private BSTNode<E> processLeft(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
@@ -48,6 +59,15 @@ public class BSTImpl<E> implements BST<E> {
             return null;
         } else {
             return currentNode.getLeft();
+        }
+    }
+
+    private BSTNode<E> processRight(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
+        if (currentNode.getRight() == null) {
+            addRightNode(currentNode, nodeToAdd);
+            return null;
+        } else {
+            return currentNode.getRight();
         }
     }
 
@@ -73,15 +93,6 @@ public class BSTImpl<E> implements BST<E> {
         return comparator.compare(o1, o2) > 0;
     }
 
-    private BSTNode<E> processRight(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
-        if (currentNode.getRight() == null) {
-            addRightNode(currentNode, nodeToAdd);
-            return null;
-        } else {
-            return currentNode.getRight();
-        }
-    }
-
     private void addRightNode(BSTNode<E> currentNode, BSTNode<E> nodeToAdd) {
         currentNode.setRight(nodeToAdd);
         nodeToAdd.setParent(currentNode);
@@ -102,6 +113,11 @@ public class BSTImpl<E> implements BST<E> {
         else
             return search(key, currentNode.getRight());
     }
+
+   // public int countOfIntervalsThatKeyIn(E key) {
+
+    //}
+
 
     @Override
     public E predecessor(E key) {
@@ -178,12 +194,29 @@ public class BSTImpl<E> implements BST<E> {
     }
 
     private void removeNode(BSTNode<E> nodeToDelete) {
+        BSTNode parentOfDeletedNode = nodeToDelete.getParent();
+
         if (hasNoChildren(nodeToDelete)) {
             deleteWithoutChildren(nodeToDelete);
         } else if (hasTwoChildren(nodeToDelete)) {
             deleteWithTwoChildren(nodeToDelete);
         } else if (hasOneChild(nodeToDelete)) {
             deleteWithOneChild(nodeToDelete);
+        }
+        recomputeMaxSubTreeValue(parentOfDeletedNode);
+    }
+    private void recomputeMaxSubTreeValue(BSTNode<E> parentOfDeletedNode) {
+        BSTNode<E> currentNode = parentOfDeletedNode;
+        while(currentNode != null) {
+            E maxInSubTree = null;
+            if(parentOfDeletedNode.getRight() != null)
+                maxInSubTree = max(parentOfDeletedNode.getRight());
+            else if(parentOfDeletedNode.getLeft() != null)
+                maxInSubTree = max(parentOfDeletedNode.getLeft());
+
+            currentNode.setMaxInSubTree(maxInSubTree);
+
+            currentNode = currentNode.getParent();
         }
     }
 
@@ -215,9 +248,9 @@ public class BSTImpl<E> implements BST<E> {
         getNotNullNode(searchResult).setParent(parent);
 
         if (parent.getLeft() != null)
-            parent.setLeft(null);
+            parent.setLeft(getNotNullNode(searchResult));
         if (parent.getRight() != null)
-            parent.setRight(null);
+            parent.setRight(getNotNullNode(searchResult));
 
         searchResult.setParent(null);
     }

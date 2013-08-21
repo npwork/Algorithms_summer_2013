@@ -134,6 +134,20 @@ public class Remove extends AbstractBstTest {
         assertEquals(0, bst.getSize());
     }
 
+    @Test
+    public void should_remove_all_values_opposite_to_sequentially() throws Exception {
+        // given
+        int[] givenArray = {5, 4, 3, 2, 1};
+        addAllElementsToBst(givenArray);
+
+        // when
+        for (int i : givenArray)
+            assertTrue(bst.remove(i));
+
+        // then
+        assertEquals(0, bst.getSize());
+    }
+
     private void assertItemDeleted(int itemToDelete, int[] givenArray) {
         BSTNode search = bst.search(itemToDelete);
 
