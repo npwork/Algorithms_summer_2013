@@ -1,7 +1,5 @@
 package coursera_stanford_2013.week5.bst;
 
-import coursera_stanford_2013.week5.BSTNode;
-import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 

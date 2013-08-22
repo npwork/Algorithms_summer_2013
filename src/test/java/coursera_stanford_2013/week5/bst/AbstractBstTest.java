@@ -1,7 +1,5 @@
 package coursera_stanford_2013.week5.bst;
 
-import coursera_stanford_2013.week5.BST;
-import coursera_stanford_2013.week5.BSTImpl;
 import org.junit.Before;
 
 import java.util.Comparator;

@@ -1,6 +1,6 @@
 package coursera_stanford_2013.week5.bst.operations;
 
-import coursera_stanford_2013.week5.BSTNode;
+import coursera_stanford_2013.week5.bst.BSTNode;
 import coursera_stanford_2013.week5.bst.AbstractBstTest;
 import org.junit.Test;
 

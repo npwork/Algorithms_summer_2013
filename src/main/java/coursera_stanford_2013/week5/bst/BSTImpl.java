@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week5;
+package coursera_stanford_2013.week5.bst;
 
 import java.util.ArrayList;
 import java.util.Comparator;

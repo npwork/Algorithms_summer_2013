@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week5;
+package coursera_stanford_2013.week5.bst;
 
 /**
  * Created with IntelliJ IDEA.

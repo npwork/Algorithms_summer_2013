@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week5;
+package coursera_stanford_2013.week5.bst;
 
 public interface BST<E> {
     void add(E key);
