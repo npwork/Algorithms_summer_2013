@@ -1,12 +1,5 @@
 package coursera_stanford_2013.week5.bst;
 
-/**
- * Created with IntelliJ IDEA.
- * User: npapirniy
- * Date: 20.08.13
- * Time: 11:28
- * To change this template use File | Settings | File Templates.
- */
 public class BSTNode<E> {
     private BSTNode left;
     private BSTNode right;
