@@ -37,4 +37,14 @@ public class MaxHeapTest extends AbstractHeapTest {
         assertEquals(0, heap.getSize());
         assertTwoArraysEquals(expectedArray, resultArray);
     }
+
+    @Test
+    public void should_return_null_on_peek_call_if_empty() throws Exception {
+        super.should_return_null_on_peek_call_if_empty();
+    }
+
+    @Test
+    public void should_return_peek_value_if_not_empty() throws Exception {
+        super.should_return_peek_value_if_not_empty();
+    }
 }

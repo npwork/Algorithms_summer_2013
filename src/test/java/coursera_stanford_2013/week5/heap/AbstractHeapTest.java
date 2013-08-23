@@ -30,6 +30,24 @@ public class AbstractHeapTest {
         assertEquals(givenArray.length, sizeOfHeap);
     }
 
+    protected void should_return_peek_value_if_not_empty() throws Exception {
+        // given
+        Integer value = 10;
+        heap.add(value);
+
+        // when
+        // then
+        assertEquals(value, heap.peek());
+    }
+
+    protected void should_return_null_on_peek_call_if_empty() throws Exception {
+        // given
+
+        // when
+        // then
+        assertNull(heap.peek());
+    }
+
     protected void assertTwoArraysEquals(int[] expectedArray, int[] resultArray) {
         for (int i = 0; i < resultArray.length; ++i)
             assertEquals(expectedArray[i], resultArray[i]);

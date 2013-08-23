@@ -6,6 +6,13 @@ public abstract class AbstractHeap implements Heap {
     protected int[] values = new int[DEFAULT_HEAP_SIZE];
 
     @Override
+    public Integer peek() {
+        if(isEmpty())
+            return null;
+        return values[nextIndex - 1];
+    }
+
+    @Override
     public boolean isEmpty() {
         return nextIndex == 1;
     }
