@@ -9,7 +9,7 @@ public abstract class AbstractHeap implements Heap {
     public Integer peek() {
         if(isEmpty())
             return null;
-        return values[nextIndex - 1];
+        return values[1];
     }
 
     @Override
