@@ -2,12 +2,8 @@ package coursera_stanford_2013.week6;
 
 import java.util.LinkedList;
 
-public class ChainingHashTable implements HashTable {
-    private static final int DEFAULT_SIZE = 10;
-    private static final double DEFAULT_LOAD_FACTOR = 0.75;
+public class ChainingHashTable extends AbstractHashTable {
     private LinkedList<KeyValue>[] buckets;
-    private int size;
-    private double loadFactor;
 
     public ChainingHashTable() {
         this(DEFAULT_SIZE);
@@ -32,23 +28,22 @@ public class ChainingHashTable implements HashTable {
         safelyAddElement(index, keyValue);
     }
 
-    private void ensureLoadFactor() {
-        if ((size / (double)buckets.length) > loadFactor)
-            rehashBuckets(buckets.length * 2);
+    protected int getBucketsSize() {
+        return buckets.length;
     }
 
-    private void rehashBuckets(int newSize) {
+    @Override
+    protected void rehashBuckets(int newSize) {
         LinkedList<KeyValue>[] oldBuckets = buckets;
-        LinkedList<KeyValue>[] newBuckets = (LinkedList<KeyValue>[]) new LinkedList[newSize];
-        buckets = newBuckets;
+        buckets = (LinkedList<KeyValue>[]) new LinkedList[newSize];
 
         for (int i = 0; i < oldBuckets.length; ++i)
             if (oldBuckets[i] != null)
-                putAllValuestFromOldBucket(oldBuckets[i]);
+                putAllValuesFromOldBucket(oldBuckets[i]);
 
     }
 
-    private void putAllValuestFromOldBucket(LinkedList<KeyValue> oldBucket) {
+    private void putAllValuesFromOldBucket(LinkedList<KeyValue> oldBucket) {
         for (KeyValue item : oldBucket)
             put(item.key, item.value);
     }
@@ -84,20 +79,6 @@ public class ChainingHashTable implements HashTable {
             if (bucket.get(i).key.equals(key))
                 return i;
         return -1;
-    }
-
-    private int getIndex(int hashCode) {
-        return hashCode % (buckets.length - 1);
-    }
-
-    private void ensureNotNull(Integer key, Integer value) {
-        ensureNotNull(key);
-        ensureNotNull(value);
-    }
-
-    private void ensureNotNull(Integer integer) {
-        if (integer == null)
-            throw new IllegalArgumentException("Null not supported");
     }
 
     @Override
@@ -141,25 +122,5 @@ public class ChainingHashTable implements HashTable {
     private Integer removeElementFromBucket(LinkedList<KeyValue> bucket, int i) {
         size--;
         return bucket.remove(i).value;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    private class KeyValue {
-        Integer key;
-        Integer value;
-
-        private KeyValue(Integer key, Integer value) {
-            this.key = key;
-            this.value = value;
-        }
     }
 }
