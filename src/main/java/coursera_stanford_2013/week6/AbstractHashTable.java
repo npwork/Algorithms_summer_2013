@@ -49,7 +49,6 @@ public abstract class AbstractHashTable implements HashTable {
     protected class KeyValue {
         public Integer key;
         public Integer value;
-        public boolean deleted;
 
         public KeyValue(Integer key, Integer value) {
             this.key = key;

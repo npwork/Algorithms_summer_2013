@@ -1,31 +1,37 @@
 package coursera_stanford_2013.week6;
 
+import coursera_stanford_2013.week6.open_addressing.*;
+
 public class OpenAddressingHashTable extends AbstractHashTable {
+    private static OpenAddressingType DEFAULT_OPEN_ADDRESSING_TYPE =
+            OpenAddressingType.LINEAR_PROBING;
     private final KeyValue DELETED_KEY_VALUE;
-    private static int DEFAULT_STEP_SIZE = 1;
-    private int stepSize;
     private KeyValue[] buckets;
+    private OpenAddressing openAddressing;
 
-    public OpenAddressingHashTable() {
-        this(DEFAULT_SIZE);
+//    public OpenAddressingHashTable() {
+//        this(DEFAULT_OPEN_ADDRESSING_TYPE);
+//    }
+
+    public OpenAddressingHashTable(OpenAddressingType openAddressingType) {
+        this(DEFAULT_SIZE, openAddressingType);
     }
 
-    public OpenAddressingHashTable(int size) {
-        this(size, DEFAULT_LOAD_FACTOR, DEFAULT_STEP_SIZE);
+    public OpenAddressingHashTable(int size, OpenAddressingType openAddressingType) {
+        this(size, DEFAULT_LOAD_FACTOR, openAddressingType);
     }
 
-    public OpenAddressingHashTable(int size, double loadFactor, int stepSize) {
+    public OpenAddressingHashTable(int size, double loadFactor, OpenAddressingType openAddressingType) {
         this.buckets = new KeyValue[size];
         this.loadFactor = loadFactor;
-        this.stepSize = stepSize;
         this.DELETED_KEY_VALUE = new KeyValue(null, null);
-        this.DELETED_KEY_VALUE.deleted = true;
+        this.openAddressing = OpenAddressingFactory.getInstance(openAddressingType);
     }
 
     @Override
     public Integer get(Integer key) {
         for (int i = 0; i < buckets.length; ++i) {
-            int index = getLinearProbingIndex(key.hashCode(), i);
+            int index = openAddressing.getIndex(key.hashCode(), i, getBucketsSize());
             if (isBucketNotEmpty(index))
                 return buckets[index].value;
         }
@@ -50,7 +56,7 @@ public class OpenAddressingHashTable extends AbstractHashTable {
     }
 
     private boolean addElementToBucketIfEmpty(KeyValue keyValue, int i) {
-        int index = getLinearProbingIndex(keyValue.key.hashCode(), i);
+        int index = openAddressing.getIndex(keyValue.key.hashCode(), i, getBucketsSize());
         return tryToAddIfEmpty(keyValue, index);
     }
 
@@ -96,11 +102,6 @@ public class OpenAddressingHashTable extends AbstractHashTable {
         return !isEmptyBucket(givenBuckets, index);
     }
 
-    protected int getLinearProbingIndex(int hashCode, int index) {
-        int i = (hashCode + index) % (getBucketsSize() - 1);
-        return i;
-    }
-
     protected int getBucketsSize() {
         return buckets.length;
     }
@@ -126,7 +127,7 @@ public class OpenAddressingHashTable extends AbstractHashTable {
     @Override
     public Integer remove(Integer key) {
         for (int i = 0; i < buckets.length; ++i) {
-            int index = getLinearProbingIndex(key.hashCode(), i);
+            int index = openAddressing.getIndex(key.hashCode(), i, getBucketsSize());
             if (isBucketNotEmpty(index))
                 return removeValue(index);
         }
