@@ -9,10 +9,6 @@ public class OpenAddressingHashTable extends AbstractHashTable {
     private KeyValue[] buckets;
     private OpenAddressing openAddressing;
 
-//    public OpenAddressingHashTable() {
-//        this(DEFAULT_OPEN_ADDRESSING_TYPE);
-//    }
-
     public OpenAddressingHashTable(OpenAddressingType openAddressingType) {
         this(DEFAULT_SIZE, openAddressingType);
     }
