@@ -1,6 +1,6 @@
 package coursera_stanford_2013.week2.comparisons;
 
-import coursera_stanford_2013.util.IntegersFromFileReader;
+import coursera_stanford_2013.util.NumbersFromFileReader;
 import org.junit.Test;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class AbstractQuckSortComparisonTest {
 
     @Test
     public void fileHasValidData() throws Exception {
-        int[] ints = IntegersFromFileReader.readArrayFromFile(PATH_TO_FILE, 100000);
+        int[] ints = NumbersFromFileReader.readIntArrayFromFile(PATH_TO_FILE, 100000);
         assertEquals(100000, ints.length);
     }
 }
