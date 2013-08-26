@@ -1,6 +1,6 @@
-package coursera_stanford_2013.week6;
+package coursera_stanford_2013.week6.hash_table;
 
-import coursera_stanford_2013.week6.open_addressing.*;
+import coursera_stanford_2013.week6.hash_table.open_addressing.*;
 
 public class OpenAddressingHashTable extends AbstractHashTable {
     private static OpenAddressingType DEFAULT_OPEN_ADDRESSING_TYPE =

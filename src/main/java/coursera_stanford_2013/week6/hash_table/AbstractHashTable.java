@@ -1,10 +1,4 @@
-package coursera_stanford_2013.week6;
-
-import org.junit.Test;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.TestCase.assertTrue;
+package coursera_stanford_2013.week6.hash_table;
 
 public abstract class AbstractHashTable implements HashTable {
     protected static final int DEFAULT_SIZE = 10;

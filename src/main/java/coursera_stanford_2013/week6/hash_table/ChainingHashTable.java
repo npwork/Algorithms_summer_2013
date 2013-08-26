@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week6;
+package coursera_stanford_2013.week6.hash_table;
 
 import java.util.LinkedList;
 

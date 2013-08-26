@@ -1,4 +1,4 @@
-package coursera_stanford_2013.week6.open_addressing;
+package coursera_stanford_2013.week6.hash_table.open_addressing;
 
 public class OpenAddressingFactory {
     public static OpenAddressing getInstance(OpenAddressingType type) {

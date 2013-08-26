@@ -1,6 +1,7 @@
-package coursera_stanford_2013.week6;
+package coursera_stanford_2013.week6.hash_table;
 
-import coursera_stanford_2013.week6.open_addressing.OpenAddressingType;
+import coursera_stanford_2013.week6.hash_table.OpenAddressingHashTable;
+import coursera_stanford_2013.week6.hash_table.open_addressing.OpenAddressingType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,4 @@
-package coursera_stanford_2013.week6.open_addressing;
-
-import coursera_stanford_2013.week6.open_addressing.OpenAddressing;
+package coursera_stanford_2013.week6.hash_table.open_addressing;
 
 public class LinearProbing implements OpenAddressing {
     @Override
