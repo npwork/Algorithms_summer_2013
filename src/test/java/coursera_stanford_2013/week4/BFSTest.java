@@ -9,13 +9,6 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created with IntelliJ IDEA.
- * User: npapirniy
- * Date: 16.08.13
- * Time: 14:43
- * To change this template use File | Settings | File Templates.
- */
 public class BFSTest {
 
 
@@ -61,34 +54,31 @@ public class BFSTest {
     }
 
     @Test
-    public void cormans_algorithms_book_bfs() throws Exception {
+    public void should_build_bfs_tree_from_just_three_objects() throws Exception {
         // given
-        UndirectedGraphAL graphAL = initGraph2();
-        int searchValue = 7;
-
+        UndirectedGraphAL graphAL = new UndirectedGraphAL();
+        graphAL.addEdgeAndCreateVertex(1,2);
+        graphAL.addEdgeAndCreateVertex(2,3);
 
         // when
-        BFS.Result result = BFS.search(graphAL, 3, searchValue);
+        BFSTree bfsTree = BFS.buildBfsTree(graphAL, 1);
 
         // then
-        assertEquals(searchValue, result.getVertexValue());
-        assertEquals(3, result.getVertexDistance());
-
+        assertEquals(1, bfsTree.getDistanceTo(2));
+        assertEquals(2, bfsTree.getDistanceTo(3));
     }
 
     private UndirectedGraphAL initGraph2() {
         UndirectedGraphAL graphAL = new UndirectedGraphAL();
 
-        graphAL.addEdgeAndCreateVertex(1,2);
-        graphAL.addEdgeAndCreateVertex(2,3);
-        graphAL.addEdgeAndCreateVertex(3,4);
-        graphAL.addEdgeAndCreateVertex(4,5);
-        graphAL.addEdgeAndCreateVertex(4,6);
-        graphAL.addEdgeAndCreateVertex(5,6);
-        graphAL.addEdgeAndCreateVertex(5,7);
-        graphAL.addEdgeAndCreateVertex(5,8);
-        graphAL.addEdgeAndCreateVertex(6,8);
-        graphAL.addEdgeAndCreateVertex(8,7);
+        graphAL.addEdgeAndCreateVertex(1, 2);
+        graphAL.addEdgeAndCreateVertex(2, 3);
+        graphAL.addEdgeAndCreateVertex(2, 4);
+        graphAL.addEdgeAndCreateVertex(3, 4);
+        graphAL.addEdgeAndCreateVertex(3, 5);
+        graphAL.addEdgeAndCreateVertex(4, 5);
+        graphAL.addEdgeAndCreateVertex(4, 6);
+        graphAL.addEdgeAndCreateVertex(5, 6);
 
         return graphAL;
     }

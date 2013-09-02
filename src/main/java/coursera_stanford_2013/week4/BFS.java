@@ -13,9 +13,24 @@ import java.util.Queue;
  */
 public class BFS {
 
-    // Corman algorithm
-    public static Result search(UndirectedGraphAL graphAL, int startPoint, int searchValue) {
-        return null;
+    public static BFSTree buildBfsTree(UndirectedGraphAL graphAL, int startFrom) {
+        BFSTree tree = new BFSTree(graphAL, startFrom);
+        Queue<Vertex> queue = new LinkedList<Vertex>();
+        queue.add(graphAL.getVertex(startFrom));
+
+        while (!queue.isEmpty()) {
+            Vertex element = queue.poll();
+            for (Vertex v : element.getAdjacent()) {
+                if (tree.isWhite(v)) {
+                    tree.setColor(v, BFSTree.Color.GRAY);
+                    tree.setDistance(v, tree.getDistanceTo(element) + 1);
+                    tree.setParent(v, element);
+                    queue.add(v);
+                }
+            }
+            tree.setColor(element, BFSTree.Color.BLACK);
+        }
+        return tree;
     }
 
     public static class Result {
@@ -61,22 +76,28 @@ public class BFS {
         return adjacentVertex.getValue() == searchVertex;
     }
 
-    private static void processAdjacentVertex(Map<Integer, Vertex> alreadyMarkedVertices, Queue<Integer> queue, Vertex adjacentVertex) {
+    private static void processAdjacentVertex(Map<Integer, Vertex> alreadyMarkedVertices,
+                                              Queue<Integer> queue,
+                                              Vertex adjacentVertex) {
         if (isUnexplored(alreadyMarkedVertices, adjacentVertex)) {
             addVertexToExploreQueue(alreadyMarkedVertices, queue, adjacentVertex);
         }
     }
 
-    private static void addVertexToExploreQueue(Map<Integer, Vertex> alreadyMarkedVertices, Queue<Integer> queue, Vertex adjacentVertex) {
+    private static void addVertexToExploreQueue(Map<Integer, Vertex> alreadyMarkedVertices,
+                                                Queue<Integer> queue,
+                                                Vertex adjacentVertex) {
         markAsExplored(alreadyMarkedVertices, adjacentVertex);
         queue.add(adjacentVertex.getValue());
     }
 
-    private static Vertex markAsExplored(Map<Integer, Vertex> alreadyMarkedVertices, Vertex vertex) {
+    private static Vertex markAsExplored(Map<Integer, Vertex> alreadyMarkedVertices,
+                                         Vertex vertex) {
         return alreadyMarkedVertices.put(vertex.getValue(), vertex);
     }
 
-    private static boolean isUnexplored(Map<Integer, Vertex> alreadyMarkedVertices, Vertex adjacentVertex) {
+    private static boolean isUnexplored(Map<Integer, Vertex> alreadyMarkedVertices,
+                                        Vertex adjacentVertex) {
         return !alreadyMarkedVertices.containsKey(adjacentVertex.getValue());
     }
 }
