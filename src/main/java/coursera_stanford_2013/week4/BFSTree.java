@@ -11,19 +11,24 @@ public class BFSTree {
     private Map<Integer, Vertex> predecessorMap = new HashMap<Integer, Vertex>();
     private Map<Integer, Integer> distanceMap = new HashMap<Integer, Integer>();
 
-    public BFSTree(UndirectedGraphAL graphAL, int startFrom) {
+    public BFSTree(UndirectedGraphAL graphAL) {
         initDefaultValuesToMaps(graphAL);
+    }
+
+    public BFSTree(UndirectedGraphAL graphAL, int startFrom) {
+        this(graphAL);
         initStartPoint(startFrom);
     }
 
-    private void initStartPoint(int startFrom) {
+    public void initStartPoint(int startFrom) {
         colorMap.put(startFrom, Color.GRAY);
+        distanceMap.put(startFrom, 0);
     }
 
     private void initDefaultValuesToMaps(UndirectedGraphAL graphAL) {
         for (Map.Entry<Integer, Vertex> e : graphAL.getVertexMap().entrySet()) {
             colorMap.put(e.getKey(), Color.WHITE);
-            distanceMap.put(e.getKey(), Integer.MAX_VALUE);
+            distanceMap.put(e.getKey(), null);
             predecessorMap.put(e.getKey(), null);
         }
     }
@@ -32,8 +37,12 @@ public class BFSTree {
         return distanceMap.get(to.getValue());
     }
 
-    public int getDistanceTo(int to) {
+    public Integer getDistanceTo(int to) {
         return distanceMap.get(to);
+    }
+
+    public Integer getPredecessor(int element) {
+        return predecessorMap.get(element) == null ? null : predecessorMap.get(element).getValue();
     }
 
     public boolean isWhite(Vertex vertex) {

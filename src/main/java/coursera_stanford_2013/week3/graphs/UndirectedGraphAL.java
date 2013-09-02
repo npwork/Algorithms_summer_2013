@@ -27,6 +27,10 @@ public class UndirectedGraphAL implements Cloneable {
         return vertexMap.get(key);
     }
 
+    public boolean hasVertex(int key) {
+        return vertexMap.containsKey(key);
+    }
+
     public Vertex removeVertex(int key) {
         Vertex vertex = vertexMap.get(key);
         if (vertex == null)
