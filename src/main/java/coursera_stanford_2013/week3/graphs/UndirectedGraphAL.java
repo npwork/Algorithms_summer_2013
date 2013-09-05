@@ -7,29 +7,7 @@ import java.util.*;
  * Undirected graph representation
  * Adjacency list
  */
-public class UndirectedGraphAL implements Cloneable {
-
-    private Map<Integer, Vertex> vertexMap = new HashMap<Integer, Vertex>();
-    private List<Edge> edges = new ArrayList<Edge>();
-
-    public Vertex addVertex(int key) {
-        Vertex retrieved = getVertex(key);
-        if (retrieved != null)
-            return retrieved;
-
-        Vertex instance = new Vertex(key);
-        vertexMap.put(key, instance);
-
-        return instance;
-    }
-
-    public Vertex getVertex(int key) {
-        return vertexMap.get(key);
-    }
-
-    public boolean hasVertex(int key) {
-        return vertexMap.containsKey(key);
-    }
+public class UndirectedGraphAL extends AbstractGraphAL implements Cloneable {
 
     public Vertex removeVertex(int key) {
         Vertex vertex = vertexMap.get(key);

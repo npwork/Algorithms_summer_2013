@@ -18,7 +18,7 @@ public class DFSForest {
     }
 
     public boolean containsVertex(int vertex) {
-        return colorMap.containsKey(vertex);
+        return colorMap.get(vertex) != null && colorMap.get(vertex).equals(Color.BLACK);
     }
 
     public Vertex getParent(int vertexValue) {

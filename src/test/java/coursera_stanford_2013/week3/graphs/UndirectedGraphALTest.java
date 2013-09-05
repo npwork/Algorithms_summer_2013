@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class UndirectedGraphALTest {
+public class UndirectedGraphALTest extends AbstractGraphALTest {
 
     private UndirectedGraphAL graph;
 
@@ -18,7 +18,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void addToGraph() {
+    public void should_contain_vertex_when_add_one() {
         // given
         int key = 1;
 
@@ -32,7 +32,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void addEdge_present() {
+    public void should_contain_edge_between_two_connected_vertices() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -52,7 +52,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void hasEdge_present() {
+    public void should_not_contain_edge_between_not_connected_vertices() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -71,7 +71,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void removeEdge() {
+    public void should_remove_edge() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -93,7 +93,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void addEdgeAndCreateVertex() {
+    public void should_add_edge_and_create_vertex() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -112,7 +112,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void removeVertex() {
+    public void should_remove_edges_after_removing_edge() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -136,7 +136,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void changeEdge() {
+    public void should_change_edges_between_vertices() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -153,7 +153,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void countOfEdges_none() {
+    public void should_return_zero_when_no_edges() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -166,7 +166,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void countOfEdges_one() {
+    public void should_return_one_when_one_edge() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -180,7 +180,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void countOfEdges_more_than_one() {
+    public void should_return_count_of_edges_when_many_edges() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -195,7 +195,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void contraction() {
+    public void should_perform_contraction_between_two_vertices() {
         // given
         int key1 = 1;
         int key2 = 2;
@@ -221,7 +221,7 @@ public class UndirectedGraphALTest {
     }
 
     @Test
-    public void cloneTest() throws CloneNotSupportedException {
+    public void should_clone_vertices_and_edges() throws CloneNotSupportedException {
         // > given
         int key1 = 1;
         int key2 = 2;
@@ -240,18 +240,35 @@ public class UndirectedGraphALTest {
 
         // > then
         assertTrue(graph != clonedInstance);
+        assertHasSameGraphStructure(key1, key2, key3, key4);
+        assertSizeOfEdgesAndVerticesEquals(clonedInstance);
+        assertEdgesEquals(clonedInstance);
+        assertVerticesEquals(clonedInstance);
+    }
 
-        // order holds
+    private void assertHasSameGraphStructure(int key1, int key2, int key3, int key4) {
         assertTrue(graph.hasEdge(key1, key2));
         assertTrue(graph.hasEdge(key1, key3));
         assertTrue(graph.hasEdge(key3, key4));
         assertTrue(graph.hasEdge(key2, key4));
         assertTrue(graph.hasEdge(key3, key2));
+    }
 
-        assertEquals(graph.getEdges().size(), clonedInstance.getEdges().size());
-        assertEquals(graph.getVertexMap().size(), clonedInstance.getVertexMap().size());
+    private void assertVerticesEquals(UndirectedGraphAL clonedInstance) {
+        Iterator<Map.Entry<Integer, Vertex>> clonedInstanceIterator = clonedInstance.getVertexMap().entrySet().iterator();
+        Iterator<Map.Entry<Integer, Vertex>> graphIterator = graph.getVertexMap().entrySet().iterator();
+        while (clonedInstanceIterator.hasNext()) {
+            Map.Entry<Integer, Vertex> clonedValue = clonedInstanceIterator.next();
+            Map.Entry<Integer, Vertex> graphValue = graphIterator.next();
 
-        // edges
+            assertTrue(clonedValue.getKey().equals(graphValue.getKey()));
+            assertTrue(clonedValue.getValue().equals(graphValue.getValue()));
+
+            assertTrue(clonedValue.getValue() != graphValue.getValue());
+        }
+    }
+
+    private void assertEdgesEquals(UndirectedGraphAL clonedInstance) {
         for (int i = 0; i < clonedInstance.getEdges().size(); ++i) {
             Edge clonedEdge = clonedInstance.getEdges().get(i);
             Edge graphEdge = graph.getEdges().get(i);
@@ -262,18 +279,10 @@ public class UndirectedGraphALTest {
             clonedEdge.setFrom(graphEdge.getFrom() + 100);
             assertTrue(clonedEdge.getFrom() != graphEdge.getFrom());
         }
+    }
 
-        // vertexMaps
-        Iterator<Map.Entry<Integer,Vertex>> clonedInstanceIterator = clonedInstance.getVertexMap().entrySet().iterator();
-        Iterator<Map.Entry<Integer,Vertex>> graphIterator = graph.getVertexMap().entrySet().iterator();
-        while(clonedInstanceIterator.hasNext()) {
-            Map.Entry<Integer, Vertex> clonedValue = clonedInstanceIterator.next();
-            Map.Entry<Integer, Vertex> graphValue = graphIterator.next();
-
-            assertTrue(clonedValue.getKey().equals(graphValue.getKey()));
-            assertTrue(clonedValue.getValue().equals(graphValue.getValue()));
-
-            assertTrue(clonedValue.getValue() != graphValue.getValue());
-        }
+    private void assertSizeOfEdgesAndVerticesEquals(UndirectedGraphAL clonedInstance) {
+        assertEquals(graph.getEdges().size(), clonedInstance.getEdges().size());
+        assertEquals(graph.getVertexMap().size(), clonedInstance.getVertexMap().size());
     }
 }
