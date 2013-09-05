@@ -60,10 +60,4 @@ public class BFSTree {
     public void setParent(Vertex element, Vertex parentElement) {
         predecessorMap.put(element.getValue(), parentElement);
     }
-
-    public enum Color {
-        WHITE,
-        GRAY,
-        BLACK;
-    }
 }

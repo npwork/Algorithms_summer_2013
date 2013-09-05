@@ -31,13 +31,13 @@ public class BFS {
             Vertex element = queue.poll();
             for (Vertex v : element.getAdjacent()) {
                 if (tree.isWhite(v)) {
-                    tree.setColor(v, BFSTree.Color.GRAY);
+                    tree.setColor(v, Color.GRAY);
                     tree.setDistance(v, tree.getDistanceTo(element) + 1);
                     tree.setParent(v, element);
                     queue.add(v);
                 }
             }
-            tree.setColor(element, BFSTree.Color.BLACK);
+            tree.setColor(element, Color.BLACK);
         }
         return tree;
     }
