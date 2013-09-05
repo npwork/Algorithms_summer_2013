@@ -1,5 +1,6 @@
 package coursera_stanford_2013.week3.graphs;
 
+import coursera_stanford_2013.week3.RandomContraction;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

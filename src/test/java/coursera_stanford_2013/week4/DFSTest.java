@@ -1,20 +1,19 @@
 package coursera_stanford_2013.week4;
 
-import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
-import org.junit.Before;
+import coursera_stanford_2013.week3.graphs.GraphAL;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-public class DFSTest {
-    private UndirectedGraphAL graph;
+@RunWith(value = Parameterized.class)
+public class DFSTest extends AbstractGraphSearchTest {
+    private GraphAL graph;
 
-    @Before
-    public void setUp() throws Exception {
-        graph = new UndirectedGraphAL();
+    public DFSTest(GraphAL graph) {
+        this.graph = graph;
     }
 
     @Test

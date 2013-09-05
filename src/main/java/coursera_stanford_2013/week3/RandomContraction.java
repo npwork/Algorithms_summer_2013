@@ -1,4 +1,7 @@
-package coursera_stanford_2013.week3.graphs;
+package coursera_stanford_2013.week3;
+
+import coursera_stanford_2013.week3.graphs.Edge;
+import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
 
 import java.util.List;
 import java.util.ListIterator;

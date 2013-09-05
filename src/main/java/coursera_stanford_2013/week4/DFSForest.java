@@ -1,6 +1,6 @@
 package coursera_stanford_2013.week4;
 
-import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
+import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class DFSForest {
     private Map<Integer, Color> colorMap = new HashMap<Integer, Color>();
     private Map<Integer, Vertex> predecessorMap = new HashMap<Integer, Vertex>();
 
-    public DFSForest(UndirectedGraphAL graph) {
+    public DFSForest(GraphAL graph) {
         for (Map.Entry<Integer, Vertex> e : graph.getVertexMap().entrySet()) {
             colorMap.put(e.getKey(), Color.WHITE);
             predecessorMap.put(e.getKey(), null);

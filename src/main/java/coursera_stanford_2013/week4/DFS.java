@@ -1,6 +1,6 @@
 package coursera_stanford_2013.week4;
 
-import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
+import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
 import java.util.Map;
@@ -9,10 +9,10 @@ import java.util.Map;
  * Depth-first search
  */
 public class DFS {
-    private final UndirectedGraphAL graph;
+    private final GraphAL graph;
     private final DFSForest forest;
 
-    public DFS(UndirectedGraphAL graph) {
+    public DFS(GraphAL graph) {
         this.graph = graph;
         this.forest = new DFSForest(graph);
     }

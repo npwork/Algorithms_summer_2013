@@ -1,5 +1,6 @@
 package coursera_stanford_2013.week4;
 
+import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
@@ -11,7 +12,7 @@ public class BFSTree {
     private Map<Integer, Vertex> predecessorMap = new HashMap<Integer, Vertex>();
     private Map<Integer, Integer> distanceMap = new HashMap<Integer, Integer>();
 
-    public BFSTree(UndirectedGraphAL graphAL) {
+    public BFSTree(GraphAL graphAL) {
         initDefaultValuesToMaps(graphAL);
     }
 
@@ -25,7 +26,7 @@ public class BFSTree {
         distanceMap.put(startFrom, 0);
     }
 
-    private void initDefaultValuesToMaps(UndirectedGraphAL graphAL) {
+    private void initDefaultValuesToMaps(GraphAL graphAL) {
         for (Map.Entry<Integer, Vertex> e : graphAL.getVertexMap().entrySet()) {
             colorMap.put(e.getKey(), Color.WHITE);
             distanceMap.put(e.getKey(), null);
