@@ -47,4 +47,6 @@ public interface GraphAL extends Cloneable {
     int vertexSize();
 
     GraphAL clone() throws CloneNotSupportedException;
+
+    void deleteAllVerticesAndEdges();
 }

@@ -2,6 +2,7 @@ package coursera_stanford_2013.week4;
 
 import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.UndirectedGraphAL;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -15,6 +16,11 @@ public class BFSTest extends AbstractGraphSearchTest {
 
     public BFSTest(GraphAL graphAL) {
         this.graphAL = graphAL;
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        graphAL.deleteAllVerticesAndEdges();
     }
 
     @Test

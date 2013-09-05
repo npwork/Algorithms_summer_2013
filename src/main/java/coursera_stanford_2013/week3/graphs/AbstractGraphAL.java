@@ -172,4 +172,10 @@ public abstract class AbstractGraphAL implements GraphAL {
 
         return newVertexMap;
     }
+
+    @Override
+    public void deleteAllVerticesAndEdges() {
+        vertexMap.clear();
+        edges.clear();
+    }
 }

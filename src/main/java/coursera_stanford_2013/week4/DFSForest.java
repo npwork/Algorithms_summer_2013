@@ -9,6 +9,9 @@ import java.util.Map;
 public class DFSForest {
     private Map<Integer, Color> colorMap = new HashMap<Integer, Color>();
     private Map<Integer, Vertex> predecessorMap = new HashMap<Integer, Vertex>();
+    private Map<Integer, Integer> startTimeMap = new HashMap<Integer, Integer>();
+    private Map<Integer, Integer> stopTimeMap = new HashMap<Integer, Integer>();
+
 
     public DFSForest(GraphAL graph) {
         for (Map.Entry<Integer, Vertex> e : graph.getVertexMap().entrySet()) {
@@ -36,4 +39,29 @@ public class DFSForest {
     public void setParent(Vertex child, Vertex parent) {
         predecessorMap.put(child.getValue(), parent);
     }
+
+    public void setStartTime(int vertex, int time) {
+        startTimeMap.put(vertex, time);
+    }
+
+    public void setStartTime(Vertex vertex, int time) {
+        setStartTime(vertex.getValue(), time);
+    }
+
+    public int getStartTime(int vertex) {
+        return startTimeMap.get(vertex);
+    }
+
+    public void setStopTime(int vertex, int time) {
+        stopTimeMap.put(vertex, time);
+    }
+
+    public void setStopTime(Vertex vertex, int time) {
+        setStopTime(vertex.getValue(), time);
+    }
+
+    public int getStopTime(int vertex) {
+        return stopTimeMap.get(vertex);
+    }
+
 }
