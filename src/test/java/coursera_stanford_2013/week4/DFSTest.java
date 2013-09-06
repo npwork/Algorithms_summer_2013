@@ -1,19 +1,16 @@
 package coursera_stanford_2013.week4;
 
 import coursera_stanford_2013.week3.graphs.GraphAL;
-import coursera_stanford_2013.week3.graphs.Vertex;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.List;
-
 import static junit.framework.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(value = Parameterized.class)
-public class DFSTest extends AbstractGraphSearchTest {
+public class DFSTest extends AbstractGraphTest {
     private GraphAL graph;
 
     public DFSTest(GraphAL graph) {
@@ -93,25 +90,6 @@ public class DFSTest extends AbstractGraphSearchTest {
         // then
         assertStartTimeForFourVerticesInaRow(forest);
         assertStopTimeForFourVerticesInaRow(forest);
-    }
-
-    @Test
-    public void should_compute_topological_sorted_dag() throws Exception {
-        // given
-        graph.addEdgeAndCreateVertex(1, 2);
-        graph.addEdgeAndCreateVertex(2, 3);
-        graph.addEdgeAndCreateVertex(3, 4);
-
-        // when
-        List<Vertex> topologicallySortedDAG = new DFS(graph).topologicalSort();
-
-        // then
-        assertEquals(4, topologicallySortedDAG.size());
-
-        assertEquals(4, topologicallySortedDAG.get(0).getValue());
-        assertEquals(3, topologicallySortedDAG.get(1).getValue());
-        assertEquals(2, topologicallySortedDAG.get(2).getValue());
-        assertEquals(1, topologicallySortedDAG.get(3).getValue());
     }
 
     private void assertStartTimeForFourVerticesInaRow(DFSForest forest) {

@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 
 @RunWith(value = Parameterized.class)
-public class BFSTest extends AbstractGraphSearchTest {
+public class BFSTest extends AbstractGraphTest {
     private GraphAL graphAL;
 
     public BFSTest(GraphAL graphAL) {

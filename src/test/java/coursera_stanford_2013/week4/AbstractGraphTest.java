@@ -6,7 +6,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-public abstract class AbstractGraphSearchTest {
+public abstract class AbstractGraphTest {
     @Parameterized.Parameters
     public static java.util.Collection<Object[]> data() {
         Object[][] data = new Object[][]{{new UndirectedGraphAL()}, {new DirectedGraphAL()}};
