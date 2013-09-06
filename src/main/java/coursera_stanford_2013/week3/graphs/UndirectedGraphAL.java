@@ -14,8 +14,8 @@ public class UndirectedGraphAL extends AbstractGraphAL {
         if (vertexOne == null || vertexTwo == null)
             return false;
 
-        vertexOne.addAdjacent(vertexTwo);
-        vertexTwo.addAdjacent(vertexOne);
+        vertexOne.addEdge(vertexTwo);
+        vertexTwo.addEdge(vertexOne);
         edges.add(new Edge(keyOne, keyTwo));
         return true;
     }

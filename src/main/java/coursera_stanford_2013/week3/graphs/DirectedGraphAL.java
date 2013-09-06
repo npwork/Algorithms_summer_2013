@@ -13,7 +13,7 @@ public class DirectedGraphAL extends AbstractGraphAL {
         if (vertexOne == null || vertexTwo == null)
             return false;
 
-        vertexOne.addAdjacent(vertexTwo);
+        vertexOne.addEdge(vertexTwo);
         edges.add(new Edge(keyOne, keyTwo));
         return true;
     }

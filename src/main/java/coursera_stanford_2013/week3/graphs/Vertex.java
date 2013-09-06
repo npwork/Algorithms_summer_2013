@@ -23,7 +23,7 @@ public class Vertex implements Cloneable {
         this.id = id;
     }
 
-    public void addAdjacent(Vertex vertex) {
+    public void addEdge(Vertex vertex) {
         adjacent.add(vertex);
     }
 
@@ -75,7 +75,6 @@ public class Vertex implements Cloneable {
 
         if (id != vertex.id) return false;
         if (value != vertex.value) return false;
-        if (!adjacent.equals(vertex.adjacent)) return false;
 
         return true;
     }
