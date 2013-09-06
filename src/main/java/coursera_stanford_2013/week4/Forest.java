@@ -4,16 +4,17 @@ import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DFSForest {
+public class Forest {
     private Map<Integer, Color> colorMap = new HashMap<Integer, Color>();
     private Map<Integer, Vertex> predecessorMap = new HashMap<Integer, Vertex>();
     private Map<Integer, Integer> startTimeMap = new HashMap<Integer, Integer>();
-    private Map<Integer, Integer> stopTimeMap = new HashMap<Integer, Integer>();
+    private Map<Integer, Integer> stopTimeMap = new LinkedHashMap<Integer, Integer>();
 
 
-    public DFSForest(GraphAL graph) {
+    public Forest(GraphAL graph) {
         for (Map.Entry<Integer, Vertex> e : graph.getVertexMap().entrySet()) {
             colorMap.put(e.getKey(), Color.WHITE);
             predecessorMap.put(e.getKey(), null);

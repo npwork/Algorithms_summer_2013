@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(value = Parameterized.class)
-public class DfsTest extends AbstractDfsTest {
-    public DfsTest(GraphAL graph) {
+public class DfsOnForestWithStackTest extends AbstractDfsTest {
+    public DfsOnForestWithStackTest(GraphAL graph) {
         this.graph = graph;
     }
 

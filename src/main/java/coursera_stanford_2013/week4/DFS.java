@@ -3,27 +3,46 @@ package coursera_stanford_2013.week4;
 import coursera_stanford_2013.week3.graphs.GraphAL;
 import coursera_stanford_2013.week3.graphs.Vertex;
 
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
  * Depth-first search
  */
-public class DFS {
-    private final GraphAL graph;
-    private final DFSForest forest;
+public class Dfs {
+    protected GraphAL graph;
+    protected Forest forest;
     private int time;
 
-    public DFS(GraphAL graph) {
+    public Dfs(GraphAL graph) {
         this.graph = graph;
-        this.forest = new DFSForest(graph);
+        this.forest = new Forest(graph);
     }
 
-    public DFSForest computeForest() {
+    protected Dfs() {
+    }
+
+    public Forest computeForest() {
         for (Map.Entry<Integer, Vertex> vertexEntry : graph.getVertexMap().entrySet())
-            if (forest.isWhite(vertexEntry.getValue()))
-                dfsVisit(vertexEntry.getValue());
+            visitVertexIfNotVisited(vertexEntry.getValue());
 
         return forest;
+    }
+
+    public Forest computeForest(LinkedList<Integer> verticesIterator) {
+        while (!verticesIterator.isEmpty())
+            visitVertexIfNotVisited(getVertexFromIterator(verticesIterator));
+
+        return forest;
+    }
+
+    private Vertex getVertexFromIterator(LinkedList<Integer> verticesIterator) {
+        return graph.getVertex(verticesIterator.pop());
+    }
+
+    private void visitVertexIfNotVisited(Vertex vertex) {
+        if (forest.isWhite(vertex))
+            dfsVisit(vertex);
     }
 
     private void dfsVisit(Vertex vertex) {

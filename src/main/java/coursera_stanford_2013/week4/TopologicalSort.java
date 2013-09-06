@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class TopologicalSort {
     private final GraphAL graph;
-    private final DFSForest forest;
+    private final Forest forest;
     // Directed acyclic graph
     private List<Vertex> topologicallySortedDAG = new ArrayList<Vertex>();
 
     public TopologicalSort(GraphAL graph) {
         this.graph = graph;
-        this.forest = new DFSForest(graph);
+        this.forest = new Forest(graph);
     }
 
     public List<Vertex> sort(GraphAL graph) {
